@@ -20,7 +20,7 @@ Do not alter Base2026 production, global provider/auth configuration, existing p
 - context-mode tools absent from exposed tool inventory. Use bounded processing; do not claim an indexed KB.
 
 ## State
-Research and implementation complete; repository published and plugin installed/enabled. Public GitHub: https://github.com/offflinerpsy/seo-roast-room . Linear: https://linear.app/agregator/project/seo-roast-room-afb385165add . AGR-96/97/98/99 complete; AGR-100 release verification; AGR-101 hosted-CI blocker; AGR-102 source freshness; AGR-103 deferred Claude. Branch main; PR #5 merged.
+Initial release complete. v0.1.0: https://github.com/offflinerpsy/seo-roast-room/releases/tag/v0.1.0 (code commit 7f4809f; source ZIP uploaded). Repository: https://github.com/offflinerpsy/seo-roast-room . Linear: https://linear.app/agregator/project/seo-roast-room-afb385165add . AGR-96 through AGR-100 complete; AGR-101 hosted-CI blocker; AGR-102 source freshness; AGR-103 deferred Claude. Branch main; PR #5 merged; input-hardening issue #1 resolved.
 
 Live Base2026 MCP profiles and 20-source samples loaded for all eight selected handles. Public collection counts differ from static creator page; use dated live snapshots. Primary identities: build_in_public = Edward Sturm; webhivedigital = Kate Smoothy. Samples contain marketing claims and inconsistent/superseded advice; do not elevate them to search-engine facts. Exact scope/design in docs/BRIEF.md and docs/ARCHITECTURE.md.
 
@@ -46,7 +46,9 @@ Live Base2026 MCP profiles and 20-source samples loaded for all eight selected h
 - Hosted CI cannot start because of an account-level restriction; GitHub #2 / AGR-101 records the owner action. Do not claim green CI or modify billing/runners.
 - Final review caught per-chunk UTF-8 decoding in brief POST input. Fixed bounded buffer assembly; Cyrillic split-byte and full-length multilingual brief regressions pass on Windows and Linux. Oversized requests return 413.
 
-Next safe action: publish the verified source and v0.1.0 release, refresh only this installed plugin, and reconcile release tracking. Hosted CI remains a separate owner-action blocker.
+Installed plugin refreshed from GitHub. Installed server, reader and built index hashes match the released source. Installed room root, JavaScript and portrait returned HTTP 200; eight experts loaded. Codex app-server confirms the enabled namespaced skill. Start a fresh Codex chat and invoke `$seo-roast-room:seo-roast`; standalone skill copies use `$seo-roast`.
+
+Next safe action: after the account owner clears the GitHub Actions restriction, rerun hosted CI for issue #2 / AGR-101 and attach its actual results. Do not claim completion of the hosted matrix from local tests. Future feature work starts from current main, this baton and the linked issue.
 
 ## Rollback / helpers
-New project only; changes tracked in Git. Reference clones, temporary outputs and screenshots live under ignored .local/. No helper process running at this checkpoint.
+New project only; source and release are tracked in Git. The installed plugin has an isolated base2026-seo cache; other provider/auth settings were not part of the task. A pre-install configuration backup is kept under ignored .local/protected/. Reference clone, isolated Linux Node archive/runtime, synthetic test sessions and screenshots are under ignored .local/. All owned HTTP servers, app-server probes and Playwright browsers were closed. No continuous automation or paid runner was installed. Published ZIP SHA-256: ce557e208af2c0c156c659448de1479fe5c85aa7125920e8a9a67edd320ead60.
