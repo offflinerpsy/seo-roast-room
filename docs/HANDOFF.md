@@ -1,60 +1,59 @@
-# SEO Roast Room — active baton
+# SEO Roast Room — handoff
 
 Updated: 2026-10-13 (Europe/Minsk)
-Canonical project: seo-roast-room
-Workspace: repository root (all artifact paths below are repository-relative).
+Canonical project: seo-roast-room. Repo files and current Git state are authoritative.
 
-## Goal and authorization
-Build an open-source, Codex-first SEO council plugin inspired by nateherkai/roast-room. Research experts actually represented in Base2026, build sourced knowledge and distinct editorial personas, generate original cartoon avatars, implement a polished live room, maintain GitHub and Linear. Claude adaptation is explicitly deferred. User authorized implementation and open-source publication.
+## Delivered
+v0.2.0 is published: https://github.com/offflinerpsy/seo-roast-room/releases/tag/v0.2.0
+Repository: https://github.com/offflinerpsy/seo-roast-room
+Implementation PR #6 merged (af9077f); release commit 40fef3a.
+Linear project: https://linear.app/agregator/project/seo-roast-room-afb385165add
+AGR-96 through AGR-100 (initial release) and AGR-104 (English strategy arena) are Done.
+
+## Latest owner direction
+English interface, demos, documentation and all public project communication. Users can write briefs and receive councils in any language. Distinct playful design: an interesting table, speaking characters, evidence cards and visible disagreement. Codex first; Claude adaptation is deferred. Open-source publication and GitHub/Linear project maintenance are authorized.
+
+## Product truth
+- Original octagonal wood-and-felt arena in a warm paper workspace.
+- Eight sourced fictional expert simulations and original generated cartoon portraits.
+- Source-driven card deals, speaker cues and challenge stamps; replay, pause, next, restart, motion toggle and OS reduced motion.
+- A waiting brief remains visibly waiting. The viewer never calls a model or starts a shell.
+- English product defaults independent of old UI preferences; response language accepts auto or a bounded name/tag. Existing private sessions are not translated or rewritten.
+- Source cards, readable linked dossiers, full transcript, testable actions, dissent, unknowns, JSON/Markdown exports and complete print report.
+- Node22+ self-contained runtime; Codex skill and optional public Base2026 MCP.
+- Session JSON is canonical, schema v1 remains compatible, completed sessions are immutable.
+
+## Knowledge and attribution
+Base2026 public profiles and 20-source samples were inspected for each of eight selected handles; 42 references were curated. This is bounded research, not an exhaustive reconstruction of every creator's knowledge. Edward Sturm = build_in_public; Kate Smoothy = webhivedigital.
+Authored character traits and dialogue are editorial fiction, not real quotes or endorsements. Practitioner claims do not prove site defects. Knowledge and source limitations are in docs/RESEARCH.md and skills/seo-roast/brains.
+Google primary AI-feature and helpful-content guidance was checked on 2026-10-13. Initial live Base2026 CLI lookup returned attributed results; no client site audit is claimed.
+
+## Verification
+- Windows Node24: 19 runtime/CLI tests passed; 2 OS capability skips.
+- Ubuntu WSL isolated Node22.23.3: 21/21 runtime/CLI tests passed.
+- Chromium: 6/6, including real publication, preserved Spanish output, English defaults, evidence provenance, animation/reduced motion, dossiers, export and full print.
+- Widths 320/390/768/1024/1440: eight loaded portraits, no horizontal overflow, screenshots reviewed.
+- Build/types, format, package and publication privacy checks passed.
+- Installed v0.2.0 enabled namespaced skill discovered through Codex app-server.
+- All 40 installed skill/manifest files match source SHA-256 hashes.
+- Installed health reports 0.2.0; HTML/bundle/portrait HTTP200, English demo and next-turn browser interaction passed.
+- Release ZIP: 12,739,951 bytes; local and GitHub digest match:
+  5c615a3e2e2cc1b5e62cec1e4d35ceeac2e80f120220b81f1f12ddebdbfc95aa
+Details: docs/VERIFICATION.md and docs/REVIEW.md. Public screenshots: docs/assets/room-desktop.png and room-mobile.png. Additional evidence and synthetic helpers are ignored under .local/.
+
+## Installed usage and rollback
+Start a fresh Codex chat and invoke $seo-roast-room:seo-roast. Standalone skill copies use $seo-roast.
+Marketplace: base2026-seo. Installed cache: ~/.codex/plugins/cache/base2026-seo/seo-roast-room/0.2.0.
+Update only this marketplace with codex plugin marketplace upgrade base2026-seo, then codex plugin add seo-roast-room@base2026-seo.
+Previous stable source: v0.1.0. Private session schema remains compatible. A pre-install config backup exists under ignored .local/protected/; never publish it.
+All owned server/browser/app-server processes have closed. No paid runner or continuous automation installed.
 
 ## Protected areas
-Do not alter Base2026 production, global provider/auth configuration, existing projects, owner browser sessions, or unrelated Linear items. Never publish credentials, private transcripts, client audits or local session data. Persona dialogue is fictional interpretation, never a real person's statement or endorsement. Keep source attribution and evidence limitations.
+Preserve Base2026 production, global provider/auth settings, unrelated projects, owner browser sessions and other Linear work. Keep client evidence, credentials, raw transcripts and private sessions outside Git. Never imply actual creator participation or endorsement. No promises of rankings, indexation, AI citations or revenue.
 
-## Verified starting state
-- Existing empty Git repository; unborn master; no remote; no user files.
-- GitHub CLI authenticated as offflinerpsy; Node 24.9.0.
-- Linear team available: Agregator (AGR), f45738bd-1c11-451a-95bf-c9f5e8bbf858.
-- Reference: https://github.com/nateherkai/roast-room (MIT). Independent implementation planned.
-- Base2026 public creator directory, API, source policy inspected live.
-- Microsoft Decision-1 preflight returned uncertain abstention; normal local skill selection.
-- context-mode tools absent from exposed tool inventory. Use bounded processing; do not claim an indexed KB.
+## Remaining tracked work
+- GitHub #2 / AGR-101: hosted CI cannot start due to an account-level restriction. Reconfirmed on run 38372065292; private tracker records exact billing cause. Local tests do not establish hosted matrix success. Do not alter billing or runners.
+- GitHub #3 / AGR-102: source freshness review workflow.
+- GitHub #4 / AGR-103: Claude adapter, explicitly deferred.
 
-## State
-Active v0.2.0 work (2026-10-13): the owner requested an English-first product and all-English public GitHub presentation while allowing users to ask and receive councils in any language. Additional direction: a distinct, playful game-like design, a more interesting table, animated speakers and real evidence/objection interactions. Preserve the eight researched expert identities and provenance, existing private sessions, runtime safety boundaries and the deferred Claude scope.
-
-Exact targets: app UI/print/demo/metadata, response-language schema and prompts, meaningful motion tied to real turn data, desktop/mobile evidence, English documentation/GitHub assets, versioned release and installed package refresh. Rollback: v0.1.0 tag; existing sessions are not rewritten. Implementation merged via PR #6 (af9077f). Installed plugin refreshed to 0.2.0 and verified: enabled namespaced skill, 40 matching skill/manifest files, health 0.2.0, English demo, eight experts and Chromium next-turn interaction. Next safe action: publish the v0.2.0 source archive/release from verified main and close AGR-104 with actual release evidence. Hosted CI remains a separate account-level blocker, reconfirmed on run 38372065292.
-
-v0.2 local evidence: Windows Node24 19 passed / 2 OS skips; Ubuntu Node22 21/21; Chromium 6/6; build/types/format/package checks pass. Five widths 320/390/768/1024/1440 have no overflow and eight loaded portraits. English desktop/mobile screenshots regenerated. Any-language protocol, legacy UI preference, real Spanish publishing, evidence animations and reduced motion verified. Source and UI review in docs/REVIEW.md. Tracking: AGR-104. Private sessions not rewritten. All owned preview, test and installed-package server/browser processes have closed.
-
-Historical v0.1.0 release: https://github.com/offflinerpsy/seo-roast-room/releases/tag/v0.1.0 (code commit 7f4809f; source ZIP uploaded). Repository: https://github.com/offflinerpsy/seo-roast-room . Linear: https://linear.app/agregator/project/seo-roast-room-afb385165add . AGR-96 through AGR-100 complete; AGR-101 hosted-CI blocker; AGR-102 source freshness; AGR-103 deferred Claude. Branch main; PR #5 merged; input-hardening issue #1 resolved.
-
-Live Base2026 MCP profiles and 20-source samples loaded for all eight selected handles. Public collection counts differ from static creator page; use dated live snapshots. Primary identities: build_in_public = Edward Sturm; webhivedigital = Kate Smoothy. Samples contain marketing claims and inconsistent/superseded advice; do not elevate them to search-engine facts. Exact scope/design in docs/BRIEF.md and docs/ARCHITECTURE.md.
-
-## Plan / close condition
-1. Source roster and public work, document per-person knowledge and editorial characterization.
-2. Implement portable Codex plugin/skill, validated session protocol and local visual room.
-3. Generate and inspect original cartoon avatars.
-4. Verify functional behavior, security boundaries, desktop/mobile UI and packaged skill.
-5. Publish public GitHub repository with CI, issues, contribution/correction paths; link Linear tracking.
-6. Save exact checks, release URLs, remaining limitations and cleanup status here.
-
-## Implementation checkpoint
-- Portable plugin, repo marketplace, optional Base2026 MCP, self-contained Codex skill, protocol and schema implemented.
-- Eight dossiers and 42 curated source links saved under skills/seo-roast/brains. 20 public records retrieved per selected creator; not an exhaustive corpus review.
-- React/TypeScript/Tailwind room built successfully; dependency-free loopback server, CLI, atomic optimistic store, SSE and report export implemented.
-- Eight original imagegen portraits generated from inspected public references, copied, visually reviewed and documented in docs/ARTWORK.md.
-- Tests added: schema/evidence/round gating, store conflicts, research errors, HTTP boundaries, desktop/mobile UI.
-- Windows Node24: 18 passed, 2 OS capability skips. Ubuntu WSL isolated Node22.23.3: 20/20 passed. Chromium: 5 passed, including live publishing and full print. Five viewport screenshots verified. Build, format, types and package checks passed. Live Base2026 lookup returned two attributed records. See docs/VERIFICATION.md.
-- Review fixes: custom session paths in handoff, complete print report, filename/ID integrity, portrait readability and mobile navigation control. See docs/REVIEW.md.
-- CI, issue/PR templates, source/artwork attribution and bundled third-party notices added.
-- Official Google AI features/helpful-content docs inspected on 2026-10-13. Platform claims are bounded by this primary guidance.
-- GitHub marketplace installation and Codex app-server discovery verified for enabled namespaced skill seo-roast-room:seo-roast. Compatibility metadata explicitly reports version 0.1.0. Original bare-name smoke probe was corrected.
-- Hosted CI cannot start because of an account-level restriction; GitHub #2 / AGR-101 records the owner action. Do not claim green CI or modify billing/runners.
-- Final review caught per-chunk UTF-8 decoding in brief POST input. Fixed bounded buffer assembly; Cyrillic split-byte and full-length multilingual brief regressions pass on Windows and Linux. Oversized requests return 413.
-
-Installed plugin refreshed from GitHub. Installed server, reader and built index hashes match the released source. Installed room root, JavaScript and portrait returned HTTP 200; eight experts loaded. Codex app-server confirms the enabled namespaced skill. Start a fresh Codex chat and invoke `$seo-roast-room:seo-roast`; standalone skill copies use `$seo-roast`.
-
-Separate remaining infrastructure action: after the account owner clears the GitHub Actions restriction, rerun hosted CI for issue #2 / AGR-101 and attach its actual results. Do not claim completion of the hosted matrix from local tests. Future feature work starts from current main, this baton and the linked issue.
-
-## Rollback / helpers
-New project only; source and release are tracked in Git. The installed plugin has an isolated base2026-seo cache; other provider/auth settings were not part of the task. A pre-install configuration backup is kept under ignored .local/protected/. Reference clone, isolated Linux Node archive/runtime, synthetic test sessions and screenshots are under ignored .local/. All owned HTTP servers, app-server probes and Playwright browsers were closed. No continuous automation or paid runner was installed. Published ZIP SHA-256: ce557e208af2c0c156c659448de1479fe5c85aa7125920e8a9a67edd320ead60.
+Next safe action: for future feature work, reread AGENTS.md, this handoff and current Git state; choose a tracked issue and a codex/ branch. When the owner resolves the CI account restriction, rerun the hosted matrix and record its actual outcome.
