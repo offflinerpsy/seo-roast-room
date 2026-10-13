@@ -12,6 +12,11 @@ Brief → evidence → opening arguments → challenge → verdict/actions. Code
 
 The session JSON is canonical. Markdown is generated from it. Replaying a saved session makes no model calls. A bundled fictional demonstration is clearly labeled and immutable through the viewer.
 
+## Room startup and navigation
+The skill creates or resumes a session, starts or verifies a local room for that exact session directory, and opens the case before extended research. Text-only output is an explicit user choice. A queued browser-open response is not evidence of a visible panel; the skill supplies the clickable URL and reports any concrete host limitation.
+
+`serve --session ID --port 0 --json` validates the requested session before listening and returns the actual origin, exact-session URL, directory and process ID. The viewer reads `?session=ID`, preserves successful selection in the URL, and reports missing explicit IDs without falling back. Without an ID it chooses the most recently updated real session, then the demo. Real cases focus their latest contribution on entry; demo replay begins at the first turn. Session publication and SSE remain independent of opening the browser.
+
 ## Presentation and language
 `app/room-stage.tsx` renders the tabletop arena from the selected session and turn. The speaker, evidence card, challenge stamp and round counter resolve to actual turn IDs and evidence references. Demo playback advances saved contributions; SSE moves focus to newly published real contributions. Waiting briefs never claim active model work. CSS transform/opacity animations are bounded by presentation state and can be disabled; operating-system reduced motion wins over animation styling.
 

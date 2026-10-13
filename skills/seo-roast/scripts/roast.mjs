@@ -3,7 +3,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { createSession, validateSession } from '../lib/schema.mjs';
+import { createSession, validateSession, safeId } from '../lib/schema.mjs';
 import { readJsonBounded as readJson } from '../lib/read-json.mjs';
 import { SessionStore } from '../lib/store.mjs';
 import { startServer } from '../lib/server.mjs';
@@ -22,9 +22,25 @@ try {
     option('sessions') || path.join(process.cwd(), '.seo-roast', 'sessions'),
   );
   if (command === 'serve') {
+    const sessionId = option('session');
+    if (sessionId) {
+      safeId(sessionId);
+      if (sessionId !== 'demo') await (await new SessionStore(directory).init()).read(sessionId);
+    }
     const room = await startServer({ directory, port: Number(option('port') || 4740) });
+    const url = sessionId
+      ? `${room.origin}/?session=${encodeURIComponent(sessionId)}`
+      : room.origin;
     console.log(
-      `SEO Roast Room: ${room.origin}\nSessions: ${directory}\nCtrl+C stops the room. No model API calls.`,
+      args.includes('--json')
+        ? JSON.stringify({
+            origin: room.origin,
+            url,
+            sessionId: sessionId || null,
+            sessionDirectory: directory,
+            pid: process.pid,
+          })
+        : `SEO Roast Room: ${url}\nSessions: ${directory}\nCtrl+C stops the room. No model API calls.`,
     );
     let closing = false;
     const close = async () => {
@@ -73,7 +89,7 @@ try {
     console.log(markdown(s, experts));
   } else if (command === 'help') {
     console.log(
-      'SEO Roast Room · Node 22+\nserve [--port 4740] [--sessions DIR]\ncreate --file brief.json [--sessions DIR]\npublish --file draft.json --expected-revision N [--sessions DIR]\nvalidate --file session.json\nreport --file session.json\nresearch --query "internal linking" [--creator harrysandersseo] [--limit 8]\n\nUse $seo-roast in Codex to run a real council. The room only watches.',
+      'SEO Roast Room · Node 22+\nserve [--port 4740] [--sessions DIR] [--session ID] [--json]\ncreate --file brief.json [--sessions DIR]\npublish --file draft.json --expected-revision N [--sessions DIR]\nvalidate --file session.json\nreport --file session.json\nresearch --query "internal linking" [--creator harrysandersseo] [--limit 8]\n\nUse --port 0 to select an available port. --json prints the exact room URL and process ID.\nUse $seo-roast in Codex to run a real council. The room displays published contributions.',
     );
   } else throw new Error(`Unknown command: ${command}`);
 } catch (e) {

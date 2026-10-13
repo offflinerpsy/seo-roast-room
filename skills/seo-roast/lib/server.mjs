@@ -117,7 +117,7 @@ export async function startServer({
         return json(res, 201, session);
       }
       if (req.method !== 'GET') return json(res, 405, { error: 'Method not allowed' });
-      if (p === '/api/health') return json(res, 200, { ok: true, version: '0.2.0' });
+      if (p === '/api/health') return json(res, 200, { ok: true, version: '0.2.1' });
       if (p === '/api/bootstrap')
         return json(res, 200, {
           experts,
