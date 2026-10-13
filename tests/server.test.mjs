@@ -94,3 +94,48 @@ test('loopback room supports private briefs, replay and export with CSRF protect
 test('binding to a public address is rejected', async () => {
   await assert.rejects(startServer({ host: '0.0.0.0' }), /loopback/);
 });
+
+test('briefs preserve split UTF-8 characters and reject oversized bodies', async () => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), 'seo-roast-utf8-'));
+  const room = await startServer({ directory, port: 0 });
+  try {
+    const { token } = await (await fetch(`${room.origin}/api/bootstrap`)).json();
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Roast-Token': token,
+      Origin: room.origin,
+    };
+    const body = Buffer.from(
+      JSON.stringify({
+        title: 'Привет, SEO',
+        question: 'Проверить стратегию',
+        context: 'Я'.repeat(12000),
+      }),
+    );
+    const split = body.indexOf(Buffer.from('П')) + 1;
+    const response = await new Promise((resolve, reject) => {
+      const req = request(`${room.origin}/api/sessions`, { method: 'POST', headers }, (res) => {
+        const chunks = [];
+        res.on('data', (chunk) => chunks.push(chunk));
+        res.on('end', () =>
+          resolve({ status: res.statusCode, body: JSON.parse(Buffer.concat(chunks)) }),
+        );
+      });
+      req.on('error', reject);
+      req.write(body.subarray(0, split));
+      setTimeout(() => req.end(body.subarray(split)), 25);
+    });
+    assert.equal(response.status, 201);
+    assert.equal(response.body.title, 'Привет, SEO');
+    assert.equal(response.body.context, 'Я'.repeat(12000));
+    const tooLarge = await fetch(`${room.origin}/api/sessions`, {
+      method: 'POST',
+      headers,
+      body: ' '.repeat(128001),
+    });
+    assert.equal(tooLarge.status, 413);
+  } finally {
+    await room.close();
+    await fs.rm(directory, { recursive: true, force: true });
+  }
+});

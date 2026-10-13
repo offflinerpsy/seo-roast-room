@@ -22,7 +22,7 @@ Open **http://127.0.0.1:4740**. The clearly labeled fictional demo lets you insp
 
 ### Install in Codex
 
-The repository includes a portable `plugin.json`, a Codex compatibility manifest, the `seo-roast` skill and a repo marketplace. The compatibility manifest is needed by Codex CLI 0.145.0 to discover the skill; both layouts share exactly the same implementation. Install with:
+The repository includes a portable `plugin.json`, a Codex compatibility manifest, the `seo-roast` skill and a repo marketplace. The compatibility manifest exposes explicit version/skill metadata to Codex CLI 0.145.0; both layouts share exactly the same implementation. Install with:
 
 ```sh
 codex plugin marketplace add offflinerpsy/seo-roast-room
@@ -38,7 +38,7 @@ You can also copy the **entire** `skills/seo-roast` directory into your workspac
 In Codex:
 
 ```text
-Use $seo-roast in quick mode to review https://example.com.
+Use $seo-roast-room:seo-roast in quick mode to review https://example.com.
 We sell [offer] to [audience] in [market].
 Our objective is [qualified enquiries / sales / another outcome].
 Constraints: [time, team, budget]. Available evidence: [files/tools].
@@ -46,6 +46,8 @@ Respond in Russian. Start the room so I can follow the debate.
 ```
 
 Or create a brief in the room and paste its generated instruction into Codex. The instruction includes the exact session directory, including a custom `--sessions` path. The room waits for Codex to research and publish the rounds. It never fakes a live model response or runs a shell from a web request.
+
+Codex namespaces the plugin skill as `seo-roast-room:seo-roast`. For the standalone copied skill, use `$seo-roast` instead.
 
 ## The council
 

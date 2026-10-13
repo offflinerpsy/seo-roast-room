@@ -93,12 +93,16 @@ export async function startServer({
           !req.headers['content-type']?.startsWith('application/json')
         )
           return json(res, 403, { error: 'A same-origin room token is required' });
-        let body = '';
+        const chunks = [];
+        let size = 0;
         for await (const chunk of req) {
-          body += chunk;
-          if (Buffer.byteLength(body) > 24000) return json(res, 413, { error: 'Brief too large' });
+          size += chunk.length;
+          if (size > 128000) return json(res, 413, { error: 'Brief too large' });
+          chunks.push(chunk);
         }
-        const input = JSON.parse(body);
+        const input = JSON.parse(
+          new TextDecoder('utf-8', { fatal: true }).decode(Buffer.concat(chunks)),
+        );
         if (
           !input ||
           typeof input !== 'object' ||

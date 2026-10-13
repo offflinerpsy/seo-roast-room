@@ -241,7 +241,7 @@ function App() {
     </div>
   );
   const prompt = session
-    ? `Use $seo-roast to continue session ${session.id}. Its exact session directory is ${JSON.stringify(sessionDirectory)}; pass that directory through --sessions on every CLI operation. Read its existing brief and current revision. Research the target, run the selected ${session.mode} council, and publish validated updates through the skill CLI. ${session.language === 'ru' ? 'Write the discussion and report in Russian.' : 'Write the discussion and report in English.'}`
+    ? `Use $seo-roast-room:seo-roast (or $seo-roast for a standalone skill installation) to continue session ${session.id}. Its exact session directory is ${JSON.stringify(sessionDirectory)}; pass that directory through --sessions on every CLI operation. Read its existing brief and current revision. Research the target, run the selected ${session.mode} council, and publish validated updates through the skill CLI. ${session.language === 'ru' ? 'Write the discussion and report in Russian.' : 'Write the discussion and report in English.'}`
     : '';
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

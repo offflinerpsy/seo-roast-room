@@ -20,7 +20,7 @@ Do not alter Base2026 production, global provider/auth configuration, existing p
 - context-mode tools absent from exposed tool inventory. Use bounded processing; do not claim an indexed KB.
 
 ## State
-Research and implementation complete; release verification in progress. Public GitHub created: https://github.com/offflinerpsy/seo-roast-room . Linear project: https://linear.app/agregator/project/seo-roast-room-afb385165add . Issues AGR-96 research, AGR-97 protocol, AGR-98 UI, AGR-99 avatars, AGR-100 QA/release. Branch codex/seo-roast-room.
+Research and implementation complete; repository published and plugin installed/enabled. Public GitHub: https://github.com/offflinerpsy/seo-roast-room . Linear: https://linear.app/agregator/project/seo-roast-room-afb385165add . AGR-96/97/98/99 complete; AGR-100 release verification; AGR-101 hosted-CI blocker; AGR-102 source freshness; AGR-103 deferred Claude. Branch main; PR #5 merged.
 
 Live Base2026 MCP profiles and 20-source samples loaded for all eight selected handles. Public collection counts differ from static creator page; use dated live snapshots. Primary identities: build_in_public = Edward Sturm; webhivedigital = Kate Smoothy. Samples contain marketing claims and inconsistent/superseded advice; do not elevate them to search-engine facts. Exact scope/design in docs/BRIEF.md and docs/ARCHITECTURE.md.
 
@@ -38,13 +38,15 @@ Live Base2026 MCP profiles and 20-source samples loaded for all eight selected h
 - React/TypeScript/Tailwind room built successfully; dependency-free loopback server, CLI, atomic optimistic store, SSE and report export implemented.
 - Eight original imagegen portraits generated from inspected public references, copied, visually reviewed and documented in docs/ARTWORK.md.
 - Tests added: schema/evidence/round gating, store conflicts, research errors, HTTP boundaries, desktop/mobile UI.
-- 15 runtime/CLI tests and 4 browser tests passed. Added an additional live-publish browser regression for the release pass. Five viewport screenshots verified. Package check and type check passed. Live Base2026 lookup returned two attributed records.
+- Windows Node24: 18 passed, 2 OS capability skips. Ubuntu WSL isolated Node22.23.3: 20/20 passed. Chromium: 5 passed, including live publishing and full print. Five viewport screenshots verified. Build, format, types and package checks passed. Live Base2026 lookup returned two attributed records. See docs/VERIFICATION.md.
 - Review fixes: custom session paths in handoff, complete print report, filename/ID integrity, portrait readability and mobile navigation control. See docs/REVIEW.md.
 - CI, issue/PR templates, source/artwork attribution and bundled third-party notices added.
 - Official Google AI features/helpful-content docs inspected on 2026-10-13. Platform claims are bounded by this primary guidance.
-- No release or push yet. No ongoing helper server at this checkpoint.
+- GitHub marketplace installation and Codex app-server discovery verified for enabled namespaced skill seo-roast-room:seo-roast. Compatibility metadata explicitly reports version 0.1.0. Original bare-name smoke probe was corrected.
+- Hosted CI cannot start because of an account-level restriction; GitHub #2 / AGR-101 records the owner action. Do not claim green CI or modify billing/runners.
+- Final review caught per-chunk UTF-8 decoding in brief POST input. Fixed bounded buffer assembly; Cyrillic split-byte and full-length multilingual brief regressions pass on Windows and Linux. Oversized requests return 413.
 
-Next safe action: run the new live-publish browser test, publish the repository, verify installation from GitHub and green CI, then tag the initial release and reconcile Linear.
+Next safe action: publish the verified source and v0.1.0 release, refresh only this installed plugin, and reconcile release tracking. Hosted CI remains a separate owner-action blocker.
 
 ## Rollback / helpers
 New project only; changes tracked in Git. Reference clones, temporary outputs and screenshots live under ignored .local/. No helper process running at this checkpoint.

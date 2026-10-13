@@ -63,7 +63,7 @@ test('new brief remains pending and provides a real Codex handoff', async ({ pag
     .getByLabel('URL и вопрос совета')
     .fill('Review https://example.com service page strategy; this is a test.');
   await page.getByRole('button', { name: 'Собрать совет' }).click();
-  await expect(page.locator('.codex-handoff')).toContainText('Use $seo-roast to continue session');
+  await expect(page.locator('.codex-handoff')).toContainText('Use $seo-roast-room:seo-roast');
   await expect(page.locator('.room-indicator')).toContainText('Ждёт Codex');
   await expect(page.locator('.turn')).toHaveCount(0);
   await expect(page.locator('.codex-handoff')).toContainText('ui-sessions');

@@ -11,6 +11,6 @@ Open an issue describing the user-visible problem and a reproducible example. A 
 6. Run build, tests, package validation and desktop/mobile UI checks. Submit a PR with evidence and the strongest remaining limitation.
 
 ## Code changes
-`npm ci`, `npm run build`, `npm test`, `npm run check`, `npm run test:ui`. UI changes require updated prebuilt room artifacts and screenshots. Dependencies are locked; runtime server/CLI remains Node-only. Test meaningful failure boundaries: interrupted writes, evidence provenance, concurrency, network failure, accessibility and live updates.
+`npm ci`, `npm run build`, `npm test`, `npm run check`, `npm run format:check`, `npm run test:ui`. Use `npm run format` for readable source formatting. UI changes require updated prebuilt room artifacts and screenshots. Dependencies are locked; runtime server/CLI remains Node-only. Test meaningful failure boundaries: interrupted writes, evidence provenance, concurrency, network failure, accessibility and live updates.
 
 Keep client data, tokens, credentials, private transcripts and `.local/` out of patches. Preserve attribution. Version breaking session changes; never reinterpret existing evidence silently. Use concise commits and link a GitHub issue; maintainers may cross-link Linear tasks.
