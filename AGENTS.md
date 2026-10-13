@@ -9,3 +9,5 @@ Codex-first open-source SEO council and local room. Claude support is deferred.
 - App binds to loopback. No model API key required for the Codex skill workflow.
 - Run relevant tests and verify desktop/mobile screenshots for UI changes.
 - Use docs/ARCHITECTURE.md and README.md as maintained implementation truth.
+- Product chrome, shipped demos, developer documentation and public project communication are English. User-authored briefs and council output may use any language; never translate or rewrite existing private sessions implicitly.
+- Motion must express real session state, speaker turns or cited evidence. Respect reduced motion; never animate a waiting brief as if a model were working.

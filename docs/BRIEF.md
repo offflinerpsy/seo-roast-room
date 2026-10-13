@@ -1,7 +1,7 @@
 # SEO Roast Room
 
 ## Product
-An evidence-first SEO war room for Codex. Eight editorial simulations grounded in publicly attributable work challenge a site, a strategy, or a decision, then produce a short verdict and testable actions. English and Russian UI. No paid model API, no hidden inference service, no Claude adapter in this release.
+An evidence-first SEO war room for Codex. Eight editorial simulations grounded in publicly attributable work challenge a site, a strategy, or a decision, then produce a short verdict and testable actions. English product interface and public materials; user conversations and findings may use any language. No paid model API, no hidden inference service, no Claude adapter in this release.
 
 ## Core roster
 Darren Shaw (local search), Harry Sanders (technical foundations and information gain), Edward Sturm (buyer-intent content and distribution), Neil Patel (growth economics), TJ Robertson (AI recommendation systems), Joshua Maraney (search measurement and paid/organic coordination), Kate Smoothy (commercial content and conversion), Dan Davies (WordPress delivery and maintainability).
@@ -18,7 +18,7 @@ Selection uses Base2026 coverage plus distinct responsibilities, not a claim tha
 - Public Base2026 MCP research can refresh the room's knowledge without bundling proprietary data or requiring credentials.
 
 ## Experience
-Warm dark ink, cream typography, restrained clay-orange accent. A tactile oval council table with eight illustrated portraits, readable debate transcript, source drawer and action board. Expert dossiers are accessible from portraits. New-session brief produces a copyable Codex instruction and waits for the agent; the viewer never pretends to generate an audit. A clearly marked fictional demo teaches the workflow.
+Warm paper workspace, dark slate arena and a restrained clay-orange accent. An original octagonal wood-and-felt strategy table seats eight illustrated characters. Actual turns drive speaker gestures, speech cues, source-card deals and challenge stamps. An evidence deck, readable transcript and action board keep the play connected to inspectable claims. Replay, pause, step, restart and reduced-motion controls are explicit. Expert dossiers are accessible from portraits. A new-session brief produces a copyable Codex instruction and waits for the agent; the viewer never pretends to generate an audit. A clearly marked English fictional demo teaches the workflow.
 
 ## Delivery
 Public repository https://github.com/offflinerpsy/seo-roast-room ; Linear https://linear.app/agregator/project/seo-roast-room-afb385165add (AGR-96 through AGR-100). MIT code and original project text; third-party names, sources and references retain their rights. Original generated artwork attribution recorded separately. Repository distribution first; directory listing requires a separate submission and is not claimed.

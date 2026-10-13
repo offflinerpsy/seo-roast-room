@@ -4,8 +4,6 @@ import {
   ArrowUpRight,
   ArrowRight,
   Plus,
-  Play,
-  Pause,
   ArrowCounterClockwise,
   BookOpen,
   FileText,
@@ -16,7 +14,6 @@ import {
   Copy,
   DownloadSimple,
   CaretRight,
-  Globe,
   WarningCircle,
   List,
   Fire,
@@ -25,6 +22,8 @@ import {
 import type { Expert, Session, Summary, Evidence, Turn } from './types';
 import './style.css';
 import { PrintReport } from './print-report';
+import { RoomStage } from './room-stage';
+import { Dossier } from './dossier';
 
 async function api<T>(url: string, options?: RequestInit): Promise<T> {
   const r = await fetch(url, options);
@@ -32,13 +31,6 @@ async function api<T>(url: string, options?: RequestInit): Promise<T> {
   if (!r.ok) throw new Error(data.error || `HTTP ${r.status}`);
   return data;
 }
-const ruStage: Record<string, string> = {
-  brief: 'Бриф',
-  evidence: 'Доказательства',
-  opening: 'Позиции',
-  challenge: 'Дебаты',
-  verdict: 'Решение',
-};
 const enStage: Record<string, string> = {
   brief: 'Brief',
   evidence: 'Evidence',
@@ -56,14 +48,6 @@ const safeHref = (s: string) => {
   }
 };
 function App() {
-  const [lang, setLang] = useState<'ru' | 'en'>(() => {
-    try {
-      return localStorage.getItem('roast-language') === 'en' ? 'en' : 'ru';
-    } catch {
-      return 'ru';
-    }
-  });
-  const tr = (ru: string, en: string) => (lang === 'ru' ? ru : en);
   const [experts, setExperts] = useState<Expert[]>([]);
   const [summaries, setSummaries] = useState<Summary[]>([]);
   const [session, setSession] = useState<Session | null>(null);
@@ -80,6 +64,8 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const [visibleCount, setVisibleCount] = useState<number | null>(null);
   const [activeTurn, setActiveTurn] = useState<Turn | null>(null);
+  const [presenting, setPresenting] = useState(false);
+  const previous = useRef<{ id: string; turns: number } | null>(null);
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState('');
   const [mode, setMode] = useState('quick');
@@ -90,48 +76,45 @@ function App() {
   useEffect(() => {
     currentId.current = selectedId;
   }, [selectedId]);
-  useEffect(() => {
-    document.documentElement.lang = lang;
+
+  const refresh = useCallback(async (id: string, initial = false) => {
+    const serial = ++requestId.current;
     try {
-      localStorage.setItem('roast-language', lang);
-    } catch {}
-  }, [lang]);
-  const refresh = useCallback(
-    async (id: string, initial = false) => {
-      const serial = ++requestId.current;
-      try {
-        const data = await api<{
-          experts: Expert[];
-          token: string;
-          sessionDirectory: string;
-          sessions: Summary[];
-          errors: { id: string }[];
-        }>('/api/bootstrap');
-        const chosenId = data.sessions.some((s) => s.id === id) ? id : data.sessions[0]?.id;
-        const full = chosenId ? await api<Session>(`/api/sessions/${chosenId}`) : null;
-        if (serial !== requestId.current) return;
-        setExperts(data.experts);
-        setToken(data.token);
-        setSessionDirectory(data.sessionDirectory);
-        setSummaries(data.sessions);
-        setSession(full);
-        if (chosenId && chosenId !== id) setSelectedId(chosenId);
-        setError(
-          data.errors.length
-            ? `${data.errors.length} ${lang === 'ru' ? 'повреждённых сессий: проверьте JSON через CLI.' : 'invalid sessions: validate JSON with the CLI.'}`
-            : '',
-        );
-        if (initial) {
-          setVisibleCount(null);
-          setPlaying(false);
-          setActiveTurn(null);
-        }
-      } catch (e) {
-        if (serial === requestId.current) setError((e as Error).message);
+      const data = await api<{
+        experts: Expert[];
+        token: string;
+        sessionDirectory: string;
+        sessions: Summary[];
+        errors: { id: string }[];
+      }>('/api/bootstrap');
+      const chosenId = data.sessions.some((s) => s.id === id) ? id : data.sessions[0]?.id;
+      const full = chosenId ? await api<Session>(`/api/sessions/${chosenId}`) : null;
+      if (serial !== requestId.current) return;
+      setExperts(data.experts);
+      setToken(data.token);
+      setSessionDirectory(data.sessionDirectory);
+      setSummaries(data.sessions);
+      setSession(full);
+      if (chosenId && chosenId !== id) setSelectedId(chosenId);
+      setError(
+        data.errors.length
+          ? `${data.errors.length} ${'invalid sessions: validate JSON with the CLI.'}`
+          : '',
+      );
+      if (initial || previous.current?.id !== full?.id) {
+        setVisibleCount(null);
+        setPlaying(false);
+        setActiveTurn(full?.turns[0] || null);
+        setPresenting(false);
+      } else if (full && !full.demo && full.turns.length > (previous.current?.turns || 0)) {
+        setActiveTurn(full.turns.at(-1) || null);
+        setPresenting(true);
       }
-    },
-    [lang],
-  );
+      previous.current = full ? { id: full.id, turns: full.turns.length } : null;
+    } catch (e) {
+      if (serial === requestId.current) setError((e as Error).message);
+    }
+  }, []);
   useEffect(() => {
     void refresh(selectedId, true);
   }, [selectedId, refresh]);
@@ -142,36 +125,30 @@ function App() {
       setConnected(true);
       void refresh(currentId.current);
     });
-    stream.addEventListener('failure', () =>
-      setError(
-        lang === 'ru'
-          ? 'Не удалось прочитать сессии. Проверьте файлы.'
-          : 'Could not read sessions. Check files.',
-      ),
-    );
+    stream.addEventListener('failure', () => setError('Could not read sessions. Check files.'));
     stream.onerror = () => setConnected(false);
     return () => stream.close();
-  }, [refresh, lang]);
+  }, [refresh]);
   useEffect(() => {
     if (!playing || !session) return;
     const timer = window.setInterval(
-      () =>
-        setVisibleCount((n) => {
-          const next = (n ?? 0) + 1;
-          if (next >= session.turns.length) {
-            setPlaying(false);
-            return session.turns.length;
-          }
-          return next;
-        }),
-      2600,
+      () => setVisibleCount((n) => Math.min((n ?? 1) + 1, session.turns.length)),
+      4200,
     );
     return () => clearInterval(timer);
-  }, [playing, session]);
+  }, [playing, session?.id, session?.turns.length]);
   useEffect(() => {
-    if (visibleCount !== null && session)
+    if (visibleCount !== null && session) {
       setActiveTurn(session.turns[Math.max(0, visibleCount - 1)] || null);
-  }, [visibleCount, session]);
+      setPresenting(true);
+      if (visibleCount >= session.turns.length) setPlaying(false);
+    }
+  }, [visibleCount, session?.id]);
+  useEffect(() => {
+    if (!presenting || playing) return;
+    const timer = window.setTimeout(() => setPresenting(false), 4200);
+    return () => clearTimeout(timer);
+  }, [presenting, activeTurn?.id, playing]);
   useEffect(() => {
     if (modal) {
       dialogRef.current?.showModal();
@@ -183,13 +160,7 @@ function App() {
             if (!cancelled) setDossier(d.markdown);
           })
           .catch(() => {
-            if (!cancelled)
-              setDossier(
-                tr(
-                  'Досье не загрузилось. Попробуйте снова.',
-                  'Could not load the dossier. Try again.',
-                ),
-              );
+            if (!cancelled) setDossier('Could not load the dossier. Try again.');
           });
         return () => {
           cancelled = true;
@@ -208,25 +179,41 @@ function App() {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      setError(
-        tr(
-          'Копирование недоступно. Выделите текст вручную.',
-          'Clipboard unavailable. Select and copy the text manually.',
-        ),
-      );
+      setError('Clipboard unavailable. Select and copy the text manually.');
     }
   };
-  const stageLabel = (stage: string) => (lang === 'ru' ? ruStage : enStage)[stage] || stage;
+  const stageLabel = (stage: string) => enStage[stage] || stage;
   const statusLabel = (s: string) =>
     ({
-      waiting: tr('Ждёт Codex', 'Waiting for Codex'),
-      running: tr('Совет работает', 'Council running'),
-      complete: tr('Завершено', 'Complete'),
-      failed: tr('Нужна проверка', 'Needs attention'),
+      waiting: 'Waiting for Codex',
+      running: 'Council running',
+      complete: 'Complete',
+      failed: 'Needs attention',
     })[s] || s;
   const turns = session?.turns.slice(0, visibleCount ?? undefined) || [];
   const spotlight = activeTurn || turns[0];
   const speaker = experts.find((e) => e.id === spotlight?.seat);
+  const replay = () => {
+    if (playing) {
+      setPlaying(false);
+      setPresenting(false);
+      return;
+    }
+    if (visibleCount === null || visibleCount >= (session?.turns.length || 0)) setVisibleCount(1);
+    setPlaying(true);
+    setPresenting(true);
+    setTab('debate');
+  };
+  const nextTurn = () => {
+    setPlaying(false);
+    const next = Math.min(
+      (session?.turns.findIndex((t) => t.id === spotlight?.id) ?? -1) + 2,
+      session?.turns.length || 0,
+    );
+    setVisibleCount(next);
+    setActiveTurn(session?.turns[next - 1] || null);
+    setPresenting(true);
+  };
   const evidencePills = (ids: string[]) => (
     <div className="evidence-pills">
       {ids.map((id) => (
@@ -241,7 +228,7 @@ function App() {
     </div>
   );
   const prompt = session
-    ? `Use $seo-roast-room:seo-roast (or $seo-roast for a standalone skill installation) to continue session ${session.id}. Its exact session directory is ${JSON.stringify(sessionDirectory)}; pass that directory through --sessions on every CLI operation. Read its existing brief and current revision. Research the target, run the selected ${session.mode} council, and publish validated updates through the skill CLI. ${session.language === 'ru' ? 'Write the discussion and report in Russian.' : 'Write the discussion and report in English.'}`
+    ? `Use $seo-roast-room:seo-roast (or $seo-roast for a standalone skill installation) to continue session ${session.id}. Its exact session directory is ${JSON.stringify(sessionDirectory)}; pass that directory through --sessions on every CLI operation. Read its existing brief and current revision. Research the target, run the selected ${session.mode} council, and publish validated updates through the skill CLI. ${session.language === 'auto' ? 'Match the language of the user request unless they ask otherwise.' : 'Write the discussion and findings in the requested language: ' + JSON.stringify(session.language) + '.'}`
     : '';
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -257,7 +244,7 @@ function App() {
           question: data.get('question'),
           context: data.get('context'),
           mode,
-          language: lang,
+          language: String(data.get('language') || '').trim() || 'auto',
           seats: chosen,
         }),
       });
@@ -295,12 +282,9 @@ function App() {
     <>
       <div className="app-shell">
         <a className="skip" href="#main">
-          {tr('К содержимому', 'Skip to content')}
+          {'Skip to content'}
         </a>
-        <aside
-          className={`sidebar ${sidebar ? 'is-open' : ''}`}
-          aria-label={tr('Навигация', 'Navigation')}
-        >
+        <aside className={`sidebar ${sidebar ? 'is-open' : ''}`} aria-label={'Navigation'}>
           <a href="/" className="brand">
             <span className="brand-icon">
               <Fire weight="fill" size={23} />
@@ -320,13 +304,13 @@ function App() {
             }}
           >
             <Plus size={18} />
-            {tr('Новый разбор', 'New roast')}
+            {'New roast'}
             <span>↗</span>
           </button>
-          <div className="nav-caption">{tr('РАБОЧЕЕ ПРОСТРАНСТВО', 'WORKSPACE')}</div>
+          <div className="nav-caption">{'WORKSPACE'}</div>
           <button className="nav-active" onClick={() => document.getElementById('main')?.focus()}>
             <ChatCircleDots size={19} />
-            {tr('Комната совета', 'Council room')}
+            {'Council room'}
             <span className="tiny-dot" />
           </button>
           <button
@@ -338,10 +322,10 @@ function App() {
             }}
           >
             <BookOpen size={19} />
-            {tr('Источники разбора', 'Session sources')}
+            {'Session sources'}
           </button>
           <div className="nav-caption history-title">
-            {tr('СЕССИИ', 'SESSIONS')}
+            {'SESSIONS'}
             <span>{summaries.length}</span>
           </div>
           <div className="session-list">
@@ -355,9 +339,7 @@ function App() {
                 <span>
                   {s.title}
                   <small>
-                    {s.demo
-                      ? tr('Демонстрация', 'Demonstration')
-                      : new Date(s.updatedAt).toLocaleDateString(lang)}
+                    {s.demo ? 'Demonstration' : new Date(s.updatedAt).toLocaleDateString('en')}
                   </small>
                 </span>
               </button>
@@ -368,7 +350,7 @@ function App() {
               B<span>26</span>
             </span>
             <div>
-              {tr('Знания с источниками', 'Knowledge with receipts')}
+              {'Knowledge with receipts'}
               <a href="https://base2026.dev" target="_blank" rel="noreferrer">
                 Base2026 <ArrowUpRight size={13} />
               </a>
@@ -377,7 +359,7 @@ function App() {
         </aside>
         {sidebar && (
           <button
-            aria-label={tr('Закрыть меню', 'Close navigation')}
+            aria-label={'Close navigation'}
             className="sidebar-backdrop"
             onClick={() => setSidebar(false)}
           />
@@ -387,30 +369,21 @@ function App() {
             <div className="breadcrumb">
               <button
                 className="mobile-menu icon-button"
-                aria-label={tr('Открыть меню', 'Open navigation')}
+                aria-label={'Open navigation'}
                 onClick={() => setSidebar(!sidebar)}
               >
                 <List size={22} />
               </button>
               <span>SEO Roast Room</span>
               <CaretRight size={13} />
-              <strong>{tr('Комната совета', 'Council room')}</strong>
+              <strong>{'Council room'}</strong>
             </div>
             <div className="topbar-tools">
               <span className={`connection ${connected ? 'online' : ''}`}>
                 <i />
-                {connected
-                  ? tr('Локально · подключено', 'Local · connected')
-                  : tr('Переподключение', 'Reconnecting')}
+                {connected ? 'Local · connected' : 'Reconnecting'}
               </span>
-              <button
-                className="language"
-                onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')}
-                aria-label="Switch language"
-              >
-                <Globe size={15} />
-                {lang.toUpperCase()}
-              </button>
+
               <a
                 href="https://github.com/offflinerpsy/seo-roast-room"
                 target="_blank"
@@ -426,42 +399,32 @@ function App() {
               <div>
                 <div className="eyebrow">
                   <span />
-                  {tr('ВОСЕМЬ ВЗГЛЯДОВ. НИКАКИХ ПОДДАВКОВ.', 'EIGHT PERSPECTIVES. NO YES-MEN.')}
+                  {'THE SEO DEBATE CLUB'}
                 </div>
                 <h1>
-                  {tr('Пусть ваша SEO-стратегия', 'Let your SEO strategy')}
+                  {'Put your strategy'}
                   <br />
-                  <span>{tr('выдержит хороший спор.', 'survive a good argument.')}</span>
+                  <span>{'on the table.'}</span>
                 </h1>
               </div>
-              <p>
-                {tr(
-                  'Сильные мнения. Открытые источники.\nПлан, который можно проверить.',
-                  'Strong opinions. Open sources.\nA plan you can actually test.',
-                )}
-              </p>
+              <p>{'Strong opinions. Open sources.\nA plan you can actually test.'}</p>
             </div>
             {error && (
               <div className="error-banner" role="alert">
                 <WarningCircle size={18} />
                 {error}
-                <button onClick={() => void refresh(selectedId)}>{tr('Повторить', 'Retry')}</button>
+                <button onClick={() => void refresh(selectedId)}>{'Retry'}</button>
               </div>
             )}
             {!session ? (
               <div className="empty-room">
                 <Fire size={36} />
-                <h2>
-                  {tr('Совет готов к вашему вопросу', 'The council is ready for your question')}
-                </h2>
+                <h2>{'The council is ready for your question'}</h2>
                 <p>
-                  {tr(
-                    'Опишите сайт или решение. Codex соберёт доказательства и проведёт разбор.',
-                    'Describe a site or a decision. Codex will gather evidence and run the review.',
-                  )}
+                  {'Describe a site or a decision. Codex will gather evidence and run the review.'}
                 </p>
                 <button className="primary" onClick={() => setModal('new')}>
-                  {tr('Начать разбор', 'Start a roast')}
+                  {'Start a roast'}
                 </button>
               </div>
             ) : (
@@ -472,107 +435,42 @@ function App() {
                   </div>
                   <div>
                     <span className="micro-label">
-                      {session.demo
-                        ? tr('ВЫМЫШЛЕННЫЙ ПРИМЕР', 'FICTIONAL EXAMPLE')
-                        : tr('ВОПРОС НА СТОЛЕ', 'ON THE TABLE')}
+                      {session.demo ? 'FICTIONAL EXAMPLE' : 'ON THE TABLE'}
                     </span>
-                    <h2>{session.title}</h2>
+                    <h2 dir="auto">{session.title}</h2>
                   </div>
                   <span className="mode-tag">
                     {session.mode === 'council'
-                      ? tr('Полный совет', 'Full council')
+                      ? 'Full council'
                       : session.mode === 'quick'
-                        ? tr('Быстрый разбор', 'Quick roast')
-                        : tr('Консультация', 'Consult')}
+                        ? 'Quick roast'
+                        : 'Consult'}
                   </span>
                 </section>
                 <div className="room-grid">
-                  <section className="room-panel" aria-label={tr('Стол экспертов', 'Expert table')}>
-                    <div className="room-toolbar">
-                      <span className="room-indicator">
-                        <span />
-                        {session.demo
-                          ? tr('ДЕМО-КОМНАТА', 'DEMO ROOM')
-                          : statusLabel(session.status)}
-                      </span>
-                      <span className="muted small">
-                        {session.seats.length} {tr('экспертов за столом', 'experts at the table')}
-                      </span>
-                    </div>
-                    <div className="council-stage">
-                      <div className="table-shadow" />
-                      <div className="council-table">
-                        <div className="table-inlay">
-                          <Fire size={26} weight="duotone" />
-                          <strong>SEO ROAST ROOM</strong>
-                          <span>{tr('ДОКАЗАТЕЛЬСТВА ВАЖНЕЕ ЭГО', 'EVIDENCE OVER EGO')}</span>
-                        </div>
-                      </div>
-                      {experts.map((e, i) => (
-                        <button
-                          key={e.id}
-                          onClick={() => setModal(e)}
-                          style={{ '--seat-color': e.color } as React.CSSProperties}
-                          className={`expert-seat seat-${i} ${speaker?.id === e.id ? 'is-speaking' : ''} ${session.seats.includes(e.id) ? '' : 'not-selected'}`}
-                          aria-label={`${e.name} — ${tr(e.roleRu, e.role)}. ${tr('Открыть досье', 'Open dossier')}`}
-                        >
-                          <div className="portrait-wrap">
-                            <img
-                              src={e.avatar}
-                              alt={tr(
-                                `Мультяшный аватар ${e.name}`,
-                                `Cartoon illustration of ${e.name}`,
-                              )}
-                              width="1254"
-                              height="1254"
-                            />
-                            <span className="speaker-wave">
-                              <i />
-                              <i />
-                              <i />
-                            </span>
-                          </div>
-                          <span className="expert-name">{e.name}</span>
-                          <span className="expert-role">{tr(e.roleRu, e.role)}</span>
-                        </button>
-                      ))}
-                    </div>
-                    <div className="room-bottom">
-                      <span>
-                        <span className="simulation-dot" />
-                        {tr(
-                          'AI-образы экспертов · не реальные высказывания',
-                          'AI expert simulations · not real statements',
-                        )}
-                      </span>
-                      {session.demo && (
-                        <button
-                          className="replay"
-                          onClick={() => {
-                            if (playing) setPlaying(false);
-                            else {
-                              if (visibleCount === null || visibleCount >= session.turns.length)
-                                setVisibleCount(0);
-                              setPlaying(true);
-                              setTab('debate');
-                            }
-                          }}
-                        >
-                          {playing ? (
-                            <Pause weight="fill" size={13} />
-                          ) : (
-                            <Play weight="fill" size={13} />
-                          )}{' '}
-                          {playing ? tr('Пауза', 'Pause') : tr('Проиграть спор', 'Replay debate')}
-                        </button>
-                      )}
-                    </div>
-                  </section>
+                  <RoomStage
+                    experts={experts}
+                    session={session}
+                    turn={spotlight}
+                    presenting={presenting || playing}
+                    playing={playing}
+                    count={
+                      spotlight ? session.turns.findIndex((t) => t.id === spotlight.id) + 1 : 0
+                    }
+                    onExpert={setModal}
+                    onEvidence={setModal}
+                    onPlay={replay}
+                    onNext={nextTurn}
+                    onReset={() => {
+                      setPlaying(false);
+                      setVisibleCount(1);
+                      setActiveTurn(session.turns[0] || null);
+                      setPresenting(false);
+                    }}
+                  />
                   <aside className="insight-panel">
                     <div className="insight-header">
-                      <span className="micro-label">
-                        {tr('ФОКУС ОБСУЖДЕНИЯ', 'IN THE SPOTLIGHT')}
-                      </span>
+                      <span className="micro-label">{'IN THE SPOTLIGHT'}</span>
                       <Quotes size={22} />
                     </div>
                     {spotlight && speaker ? (
@@ -581,45 +479,37 @@ function App() {
                           <img src={speaker.avatar} alt="" />
                           <div>
                             <strong>{speaker.name}</strong>
-                            <small>{tr(speaker.roleRu, speaker.role)}</small>
+                            <small>{speaker.role}</small>
                           </div>
                           <span className="live-line" />
                         </div>
-                        <p className="spotlight-text">{spotlight.text}</p>
+                        <p className="spotlight-text" dir="auto">
+                          {spotlight.text}
+                        </p>
                         {evidencePills(spotlight.evidenceIds)}
                         <div className="challenge-note">
-                          <span>{tr('ЧТО ИЗМЕНИТ МНЕНИЕ', 'WHAT WOULD CHANGE THIS VIEW')}</span>
+                          <span>{'WHAT WOULD CHANGE THIS VIEW'}</span>
                           <p>{spotlight.challenge}</p>
                         </div>
                       </>
                     ) : (
                       <div className="waiting">
                         <ChatCircleDots size={32} />
-                        <h3>
-                          {tr(
-                            'Бриф на столе. Слово за Codex.',
-                            'The brief is ready. Codex takes it from here.',
-                          )}
-                        </h3>
+                        <h3>{'The brief is ready. Codex takes it from here.'}</h3>
                         <p>
-                          {tr(
-                            'Скопируйте запрос ниже в Codex. Комната покажет результаты по мере работы.',
-                            'Copy the prompt below into Codex. The room will show results as they arrive.',
-                          )}
+                          {
+                            'Copy the prompt below into Codex. The room will show results as they arrive.'
+                          }
                         </p>
                       </div>
                     )}
                     <div className="insight-footer">
-                      <span>
-                        {session.demo
-                          ? tr('Сценарий для знакомства', 'Illustrative scenario')
-                          : tr('Сохранено локально', 'Saved locally')}
-                      </span>
+                      <span>{session.demo ? 'Illustrative scenario' : 'Saved locally'}</span>
                       <BookOpen size={15} />
                     </div>
                   </aside>
                 </div>
-                <div className="phase-track" aria-label={tr('Этапы разбора', 'Review stages')}>
+                <div className="phase-track" aria-label={'Review stages'}>
                   {phases.map((p, i) => (
                     <div
                       key={p}
@@ -634,14 +524,11 @@ function App() {
                 {session.status === 'waiting' && (
                   <div className="codex-handoff">
                     <div>
-                      <strong>
-                        {tr('Продолжить этот разбор в Codex', 'Continue this roast in Codex')}
-                      </strong>
+                      <strong>{'Continue this roast in Codex'}</strong>
                       <p>{prompt}</p>
                     </div>
                     <button className="primary" onClick={() => void copy(prompt)}>
-                      {copied ? <Check size={16} /> : <Copy size={16} />}{' '}
-                      {tr('Скопировать запрос', 'Copy prompt')}
+                      {copied ? <Check size={16} /> : <Copy size={16} />} {'Copy prompt'}
                     </button>
                   </div>
                 )}
@@ -651,7 +538,7 @@ function App() {
                       id="workspace-tabs"
                       className="tabs"
                       role="tablist"
-                      aria-label={tr('Материалы разбора', 'Review materials')}
+                      aria-label={'Review materials'}
                     >
                       {(['debate', 'actions', 'evidence'] as const).map((t, i) => (
                         <button
@@ -670,13 +557,7 @@ function App() {
                           ) : (
                             <BookOpen size={17} />
                           )}{' '}
-                          {
-                            [
-                              tr('Разговор', 'Discussion'),
-                              tr('План действий', 'Action plan'),
-                              tr('Доказательства', 'Evidence'),
-                            ][i]
-                          }
+                          {['Discussion', 'Action plan', 'Evidence'][i]}
                           <span>
                             {
                               [
@@ -711,17 +592,11 @@ function App() {
                       <>
                         <div className="section-intro">
                           <div>
-                            <h3>
-                              {tr(
-                                'Хороший спор оставляет следы.',
-                                'A good debate leaves receipts.',
-                              )}
-                            </h3>
+                            <h3>{'A good debate leaves receipts.'}</h3>
                             <p>
-                              {tr(
-                                'Нажмите на реплику — она появится у стола. Источники можно открыть отдельно.',
-                                'Select a turn to bring it to the table. Open its evidence to inspect the argument.',
-                              )}
+                              {
+                                'Select a turn to bring it to the table. Open its evidence to inspect the argument.'
+                              }
                             </p>
                           </div>
                           {visibleCount !== null && (
@@ -730,10 +605,11 @@ function App() {
                               onClick={() => {
                                 setPlaying(false);
                                 setVisibleCount(null);
+                                setPresenting(false);
                               }}
                             >
                               <ArrowCounterClockwise size={15} />
-                              {tr('Показать всё', 'Show all')}
+                              {'Show all'}
                             </button>
                           )}
                         </div>
@@ -750,9 +626,17 @@ function App() {
                                   <div className="turn-meta">
                                     <strong>{e?.name}</strong>
                                     <span>{stageLabel(t.round)}</span>
-                                    <small>{tr('AI-образ', 'AI simulation')}</small>
+                                    <small>{'AI simulation'}</small>
                                   </div>
-                                  <button className="turn-text" onClick={() => setActiveTurn(t)}>
+                                  <button
+                                    dir="auto"
+                                    className="turn-text"
+                                    onClick={() => {
+                                      setActiveTurn(t);
+                                      setPlaying(false);
+                                      setPresenting(true);
+                                    }}
+                                  >
                                     {t.text}
                                   </button>
                                   {evidencePills(t.evidenceIds)}
@@ -763,10 +647,7 @@ function App() {
                         </div>
                         {!turns.length && (
                           <div className="empty-inline">
-                            {tr(
-                              'Реплик пока нет. Codex добавит их после исследования.',
-                              'No turns yet. Codex will add them after research.',
-                            )}
+                            {'No turns yet. Codex will add them after research.'}
                           </div>
                         )}
                       </>
@@ -780,9 +661,7 @@ function App() {
                             </span>
                             <h3>{session.verdict.summary}</h3>
                             <details>
-                              <summary>
-                                {tr('Возражения и неизвестное', 'Dissent and unknowns')}
-                              </summary>
+                              <summary>{'Dissent and unknowns'}</summary>
                               <p>{session.verdict.dissent}</p>
                               <p>{session.verdict.unknowns}</p>
                             </details>
@@ -800,7 +679,7 @@ function App() {
                                   <span>{a.owner}</span>
                                   <span>{a.effort}</span>
                                   <span>
-                                    {tr('Уверенность', 'Confidence')}: {a.confidence}
+                                    {'Confidence'}: {a.confidence}
                                   </span>
                                 </div>
                                 <div className="acceptance">
@@ -809,9 +688,7 @@ function App() {
                                 </div>
                                 {a.experiment && (
                                   <details>
-                                    <summary>
-                                      {tr('Дизайн эксперимента', 'Experiment design')}
-                                    </summary>
+                                    <summary>{'Experiment design'}</summary>
                                     <dl>
                                       {Object.entries(a.experiment).map(([k, v]) => (
                                         <React.Fragment key={k}>
@@ -829,10 +706,7 @@ function App() {
                         </div>
                         {!session.actions.length && (
                           <div className="empty-inline">
-                            {tr(
-                              'План появится после обсуждения.',
-                              'The action plan follows the discussion.',
-                            )}
+                            {'The action plan follows the discussion.'}
                           </div>
                         )}
                       </>
@@ -841,17 +715,11 @@ function App() {
                       <>
                         <div className="section-intro">
                           <div>
-                            <h3>
-                              {tr(
-                                'Проверьте, на чём стоит вывод.',
-                                'Inspect what holds the argument up.',
-                              )}
-                            </h3>
+                            <h3>{'Inspect what holds the argument up.'}</h3>
                             <p>
-                              {tr(
-                                'Наблюдение, мнение практика и гипотеза — разные типы доказательств.',
-                                'An observation, a practitioner claim and a hypothesis are different kinds of evidence.',
-                              )}
+                              {
+                                'An observation, a practitioner claim and a hypothesis are different kinds of evidence.'
+                              }
                             </p>
                           </div>
                         </div>
@@ -863,7 +731,7 @@ function App() {
                                 <strong>{e.title}</strong>
                                 <p>{e.summary}</p>
                                 <small>
-                                  {e.id} · {new Date(e.retrievedAt).toLocaleDateString(lang)}
+                                  {e.id} · {new Date(e.retrievedAt).toLocaleDateString('en')}
                                 </small>
                               </div>
                               <ArrowUpRight size={20} />
@@ -872,10 +740,7 @@ function App() {
                         </div>
                         {!session.evidence.length && (
                           <div className="empty-inline">
-                            {tr(
-                              'Доказательств пока нет. Ничего не выдумываем.',
-                              'No evidence yet. Nothing fabricated.',
-                            )}
+                            {'No evidence yet. Nothing fabricated.'}
                           </div>
                         )}
                       </>
@@ -885,12 +750,7 @@ function App() {
               </>
             )}
             <footer className="page-footer">
-              <span>
-                {tr(
-                  'Мнения можно оспорить. Источники — проверить.',
-                  'Opinions can be challenged. Sources can be checked.',
-                )}
-              </span>
+              <span>{'Opinions can be challenged. Sources can be checked.'}</span>
               <span>OPEN SOURCE · CODEX FIRST</span>
             </footer>
           </main>
@@ -907,65 +767,61 @@ function App() {
             <button
               className="close-dialog icon-button"
               onClick={() => setModal(null)}
-              aria-label={tr('Закрыть', 'Close')}
+              aria-label={'Close'}
             >
               <X size={22} />
             </button>
             {modal === 'new' ? (
               <>
-                <span className="eyebrow">{tr('ВАШ СЛЕДУЮЩИЙ РАЗБОР', 'YOUR NEXT ROAST')}</span>
-                <h2 id="dialog-title">
-                  {tr('Что ставим под сомнение?', 'What are we challenging?')}
-                </h2>
+                <span className="eyebrow">{'YOUR NEXT ROAST'}</span>
+                <h2 id="dialog-title">{'What are we challenging?'}</h2>
                 <p className="dialog-intro">
-                  {tr(
-                    'Сайт, стратегия или сложный выбор. Сначала контекст, потом мнения.',
-                    'A site, a strategy, or a difficult choice. Context first, opinions second.',
-                  )}
+                  {'A site, a strategy, or a difficult choice. Context first, opinions second.'}
                 </p>
                 <form onSubmit={submit}>
                   <label>
-                    {tr('Название', 'Title')}
+                    {'Title'}
                     <input
                       name="title"
                       required
                       maxLength={160}
-                      placeholder={tr(
-                        'Продвижение локальной клиники',
-                        'Local clinic acquisition strategy',
-                      )}
+                      placeholder={'Local clinic acquisition strategy'}
                     />
                   </label>
                   <label>
-                    {tr('URL и вопрос совета', 'URL and council question')}
+                    {'URL and council question'}
                     <textarea
                       name="question"
                       required
                       maxLength={6000}
                       rows={3}
-                      placeholder={tr(
-                        'Какой следующий шаг даст больше квалифицированных обращений?',
-                        'Which next step could bring more qualified enquiries?',
-                      )}
+                      placeholder={'Which next step could bring more qualified enquiries?'}
                     />
                   </label>
                   <label>
-                    {tr(
-                      'Бизнес, рынок, ограничения и доступные данные',
-                      'Business, market, constraints and available data',
-                    )}
+                    {'Business, market, constraints and available data'}
                     <textarea
                       name="context"
                       maxLength={12000}
                       rows={3}
-                      placeholder={tr(
-                        'Что продаёте, кому, где. Сроки, бюджет, базовые показатели.',
-                        'What you sell, to whom, where. Timeline, budget and baseline metrics.',
-                      )}
+                      placeholder={
+                        'What you sell, to whom, where. Timeline, budget and baseline metrics.'
+                      }
                     />
                   </label>
+                  <label>
+                    Response language <small>optional</small>
+                    <input
+                      name="language"
+                      maxLength={80}
+                      placeholder="Match my request, or enter a language"
+                    />
+                    <small>
+                      The interface stays in English. Your council can respond in any language.
+                    </small>
+                  </label>
                   <fieldset>
-                    <legend>{tr('Глубина разбора', 'Depth')}</legend>
+                    <legend>{'Depth'}</legend>
                     <div className="mode-options">
                       {['quick', 'council', 'consult'].map((m, i) => (
                         <button
@@ -974,19 +830,13 @@ function App() {
                           className={mode === m ? 'selected' : ''}
                           onClick={() => changeMode(m)}
                         >
-                          {
-                            [
-                              tr('Быстро · 3 эксперта', 'Quick · 3 seats'),
-                              tr('Совет · до 8', 'Council · up to 8'),
-                              tr('Один эксперт', 'One expert'),
-                            ][i]
-                          }
+                          {['Quick · 3 seats', 'Council · up to 8', 'One expert'][i]}
                         </button>
                       ))}
                     </div>
                   </fieldset>
                   <fieldset>
-                    <legend>{tr('Кого пригласить', 'Choose the seats')}</legend>
+                    <legend>{'Choose the seats'}</legend>
                     <div className="choose-experts">
                       {experts.map((e) => (
                         <button
@@ -1004,10 +854,9 @@ function App() {
                     </div>
                   </fieldset>
                   <p className="form-note">
-                    {tr(
-                      'Создаётся локальный бриф. Затем скопируйте запрос в Codex, чтобы провести совет.',
-                      'This creates a local brief. Then copy its prompt into Codex to run the council.',
-                    )}
+                    {
+                      'This creates a local brief. Then copy its prompt into Codex to run the council.'
+                    }
                   </p>
                   {formError && (
                     <p role="alert" className="form-error">
@@ -1019,9 +868,7 @@ function App() {
                     className="primary submit"
                     type="submit"
                   >
-                    {saving
-                      ? tr('Создаём…', 'Creating…')
-                      : tr('Собрать совет', 'Convene the council')}
+                    {saving ? 'Creating…' : 'Convene the council'}
                     <ArrowRight size={18} />
                   </button>
                 </form>
@@ -1029,35 +876,27 @@ function App() {
             ) : modal && 'beliefs' in modal ? (
               <>
                 <div className="dossier-hero">
-                  <img
-                    src={modal.avatar}
-                    alt={tr(`Аватар ${modal.name}`, `${modal.name} avatar`)}
-                  />
+                  <img src={modal.avatar} alt={`${modal.name} avatar`} />
                   <div>
-                    <span className="eyebrow">{tr(modal.roleRu, modal.role)}</span>
+                    <span className="eyebrow">{modal.role}</span>
                     <h2 id="dialog-title">{modal.name}</h2>
-                    <p>{tr(modal.characterRu, modal.character)}</p>
+                    <p>{modal.character}</p>
                     <a href={modal.identityUrl} target="_blank" rel="noreferrer">
-                      {tr('Оригинальный автор', 'Original creator')}
+                      {'Original creator'}
                       <ArrowUpRight size={15} />
                     </a>
                   </div>
                 </div>
                 <p className="fiction-note">
-                  {tr(
-                    'Независимый AI-образ по публичным профессиональным материалам. Автор не участвует в этом совете и не подтверждает его выводы.',
-                    'An independent AI simulation inspired by public professional work. The creator does not participate in or endorse this council.',
-                  )}
+                  {
+                    'An independent AI simulation inspired by public professional work. The creator does not participate in or endorse this council.'
+                  }
                 </p>
-                <h3>{tr('Ключевой вопрос', 'Signature question')}</h3>
-                <p className="dossier-question">{tr(modal.taglineRu, modal.tagline)}</p>
+                <h3>{'Signature question'}</h3>
+                <p className="dossier-question">{modal.tagline}</p>
                 <details open>
-                  <summary>
-                    {tr('Исследованное досье и источники (EN)', 'Researched dossier and sources')}
-                  </summary>
-                  <pre className="dossier-text">
-                    {dossier || tr('Загружаем досье…', 'Loading dossier…')}
-                  </pre>
+                  <summary>{'Researched dossier and sources'}</summary>
+                  <Dossier markdown={dossier || 'Loading the source-backed dossier…'} />
                 </details>
               </>
             ) : (
@@ -1069,10 +908,10 @@ function App() {
                   <h2 id="dialog-title">{modal.title}</h2>
                   <p className="source-summary">{modal.summary}</p>
                   <dl className="source-details">
-                    <dt>{tr('Где проверено', 'Locator')}</dt>
+                    <dt>{'Locator'}</dt>
                     <dd>{modal.locator}</dd>
-                    <dt>{tr('Получено', 'Retrieved')}</dt>
-                    <dd>{new Date(modal.retrievedAt).toLocaleString(lang)}</dd>
+                    <dt>{'Retrieved'}</dt>
+                    <dd>{new Date(modal.retrievedAt).toLocaleString('en')}</dd>
                     <dt>ID</dt>
                     <dd>{modal.id}</dd>
                   </dl>
@@ -1083,15 +922,12 @@ function App() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {tr('Открыть первоисточник', 'Open original source')}
+                      {'Open original source'}
                       <ArrowUpRight size={17} />
                     </a>
                   ) : (
                     <p className="fiction-note">
-                      {tr(
-                        'Локальное или демонстрационное наблюдение; публичной ссылки нет.',
-                        'Local or demonstration evidence; no public URL.',
-                      )}
+                      {'Local or demonstration evidence; no public URL.'}
                     </p>
                   )}
                 </>

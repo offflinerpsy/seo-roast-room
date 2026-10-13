@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "id": "demo",
   "revision": 1,
-  "title": "Клиника «Липа»: ещё 100 статей или 3 сильные страницы?",
-  "question": "Вымышленная клиника хочет больше квалифицированных обращений. Стоит ли масштабировать блог или сначала улучшить страницы услуг?",
-  "context": "Учебный сценарий. Ни сайт, ни аналитика реального клиента не проверялись. Все наблюдения demo-* вымышлены. Срок первого этапа — две недели, текущая выручка и конверсия неизвестны.",
+  "title": "Linden Clinic: 100 more articles, or 3 better pages?",
+  "question": "A fictional clinic wants more qualified enquiries. Should it scale the blog or improve its service pages first?",
+  "context": "Illustrative scenario. No real client website or analytics was audited. Every demo-* observation is fictional. The first implementation phase is two weeks; revenue and conversion baselines are unknown.",
   "mode": "council",
-  "language": "ru",
+  "language": "en",
   "seats": [
     "darren",
     "harry",
@@ -23,14 +23,14 @@
   "createdAt": "2026-10-13T07:00:00.000Z",
   "updatedAt": "2026-10-13T07:00:00.000Z",
   "assumptions": [
-    "Спрос на конкретные услуги существует, но его нужно исследовать.",
-    "Владелец может проверить доставку заявок и их качество."
+    "Demand for specific services is plausible but must be researched.",
+    "The owner can verify enquiry delivery and lead quality."
   ],
   "evidence": [
     {
       "id": "demo-pages",
-      "title": "12 страниц услуг с одинаковым вступлением",
-      "summary": "Вымышленная выборка: на 12 страницах повторяются вступление, заголовок и общий призыв. Это данные сценария, а не проверенного сайта.",
+      "title": "Twelve service pages, one recycled introduction",
+      "summary": "Fictional sample: twelve service pages repeat the introduction, heading and generic call to action. This is scenario data, not a finding from a real website.",
       "kind": "observation",
       "confidence": "high",
       "url": null,
@@ -39,8 +39,8 @@
     },
     {
       "id": "demo-leads",
-      "title": "Отправка формы считается лидом без проверки качества",
-      "summary": "В демонстрации аналитика считает нажатия кнопки. Доставка письма и качество заявки не проверены; доход неизвестен.",
+      "title": "Button clicks counted as leads",
+      "summary": "The demo analytics counts button clicks. Message delivery and enquiry quality are unverified; revenue is unknown.",
       "kind": "metric",
       "confidence": "low",
       "url": null,
@@ -49,8 +49,8 @@
     },
     {
       "id": "demo-profile",
-      "title": "Услуги и часы в профиле требуют сверки",
-      "summary": "У вымышленной клиники не сверены часы, услуги и контактные пути между профилем и сайтом.",
+      "title": "Profile hours and services need verification",
+      "summary": "The fictional clinic has not reconciled opening hours, services and contact paths between its business profile and website.",
       "kind": "observation",
       "confidence": "medium",
       "url": null,
@@ -59,8 +59,8 @@
     },
     {
       "id": "demo-ai",
-      "title": "Единственный тестовый AI-ответ не упоминает клинику",
-      "summary": "Один вымышленный ответ — повод исследовать видимость, но не доказательство отсутствия бренда во всём AI-поиске.",
+      "title": "One AI answer does not mention the clinic",
+      "summary": "One fictional answer is a research lead, not evidence that the brand is absent from all AI search.",
       "kind": "hypothesis",
       "confidence": "low",
       "url": null,
@@ -70,7 +70,7 @@
     {
       "id": "google-ai",
       "title": "Google: AI features and your website",
-      "summary": "Официальные требования к участию сайта в AI-функциях следует проверять отдельно от обещаний инструментов и мнений практиков.",
+      "summary": "Check official requirements for participation in AI features separately from tool marketing and practitioner claims.",
       "kind": "primary",
       "confidence": "high",
       "url": "https://developers.google.com/search/docs/appearance/ai-features",
@@ -80,7 +80,7 @@
     {
       "id": "google-content",
       "title": "Google: helpful, reliable, people-first content",
-      "summary": "Первичный ориентир для оценки полезности и достоверности контента. Сам по себе источник не доказывает дефект конкретной страницы.",
+      "summary": "Primary guidance for assessing content usefulness and reliability. This source alone does not prove that a particular page is defective.",
       "kind": "primary",
       "confidence": "high",
       "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
@@ -93,8 +93,8 @@
       "id": "open-darren",
       "seat": "darren",
       "round": "opening",
-      "text": "Сначала найдём клинику на карте глазами пациента. Если услуги и часы расходятся, сто новых статей просто приведут людей к той же путанице. Начнём с точного профиля и страницы конкретной услуги.",
-      "challenge": "Изменю приоритет, если профиль уже точен, заметен по нужным запросам и приводит квалифицированные обращения.",
+      "text": "Find the clinic through a patient's eyes. If its hours and services disagree across the web, a hundred new articles just send more people into the same confusion. Start with an accurate profile and a useful service page.",
+      "challenge": "I will change priorities if the profile is already accurate, visible for relevant searches and producing qualified enquiries.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-profile"
@@ -105,8 +105,8 @@
       "id": "open-harry",
       "seat": "harry",
       "round": "opening",
-      "text": "Двенадцать страниц, одно вступление. Это не двенадцать причин выбрать клинику — это одна фраза в двенадцати костюмах. Проверим доступность страниц и добавим реальную информацию о лечении, врачах и процессе.",
-      "challenge": "Нужна выборка исходного HTML, рендера и содержательных отличий; один шаблон сам по себе ещё не нарушение.",
+      "text": "Twelve pages wearing the same introduction is one idea in twelve lab coats. Check crawl access and rendering, then add real detail about the treatment, practitioner and appointment. A shared template alone proves nothing.",
+      "challenge": "Show sampled source HTML, rendered content and meaningful page differences. A repeated template is not automatically a search-policy violation.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-pages",
@@ -118,8 +118,8 @@
       "id": "open-edward",
       "seat": "edward",
       "round": "opening",
-      "text": "Прежде чем писать сотую статью «что такое кариес», найдём запрос пациента, готового записаться. Одна убедительная страница услуги может быть полезнее огромной библиотеки без следующего шага.",
-      "challenge": "Поддержу широкий контент, если исследования спроса покажут, что он помогает человеку выбрать и записаться.",
+      "text": "Before article number one hundred about tooth decay, find the question asked by someone ready to book. One convincing service page may do more useful work than a library with no next step.",
+      "challenge": "I will support broader content when demand research shows how it helps a patient choose and book.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-pages",
@@ -131,8 +131,8 @@
       "id": "open-neil",
       "seat": "neil",
       "round": "opening",
-      "text": "Красивый график нажатий — ещё не выручка. У нас даже доставка формы не проверена. Сначала определим, что считается качественным обращением, и поймём, где теряется пациент.",
-      "challenge": "Если заявки уже доходят и превращаются в записи, можно обсуждать масштабирование привлечения.",
+      "text": "A beautiful chart of button clicks is not revenue. We have not even checked whether the form arrives. Define a qualified enquiry and find where the patient journey breaks before buying more traffic.",
+      "challenge": "If enquiries already arrive and become appointments, we can discuss scaling acquisition.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-leads"
@@ -143,8 +143,8 @@
       "id": "open-tj",
       "seat": "tj",
       "round": "opening",
-      "text": "Один ответ без бренда — это один ответ, а не приговор AI-поиска. Зафиксируем набор вопросов пациента, источники в ответах и повторяемость. Иначе будем оптимизировать настроение одного промпта.",
-      "challenge": "Данные о реальном пути пациентов могут показать, что AI сейчас вообще не главный канал.",
+      "text": "One AI answer without the brand is one answer, not a channel diagnosis. Record a repeatable set of patient questions, cited sources and conditions. Otherwise we are optimizing the mood of a single prompt.",
+      "challenge": "Evidence about actual patient journeys may show that AI is not an important channel for this clinic yet.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-ai",
@@ -156,8 +156,8 @@
       "id": "open-joshua",
       "seat": "joshua",
       "round": "opening",
-      "text": "Отчёт должен объяснять, откуда пришёл пациент, а не только показывать зелёные стрелки. Отделим брендовый спрос от нового и проверим, что аналитика не считает технические клики заявками.",
-      "challenge": "Для распределения бюджета нужны расходы, корректные конверсии и качество обращений; сейчас этого нет.",
+      "text": "The report needs to explain where patients came from, not just serve green arrows. Separate existing brand demand from new discovery and stop counting technical clicks as enquiries.",
+      "challenge": "Budget decisions need spend, valid conversions and enquiry quality. Those inputs are missing.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-leads"
@@ -168,8 +168,8 @@
       "id": "open-kate",
       "seat": "kate",
       "round": "opening",
-      "text": "Сайт говорит «индивидуальный подход». Это говорят все. Что конкретно получает пациент, кто его лечит, как проходит приём и что нужно для записи? Начнём с одной страницы, на которой можно принять решение.",
-      "challenge": "Если страница уже отвечает на эти вопросы и хорошо конвертирует релевантный трафик, проблема выше по воронке.",
+      "text": "'Personalized care' is what everyone says. Who treats me, what happens at the appointment, and how do I book? Start with one page that helps a real person make that decision.",
+      "challenge": "If the page already answers those questions and converts relevant visitors, the problem may be further up the funnel.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-pages",
@@ -181,8 +181,8 @@
       "id": "open-dan",
       "seat": "dan",
       "round": "opening",
-      "text": "Новый сайт на модном стеке не доставит потерянное письмо автоматически. Сначала пройдём форму от телефона до почтового ящика и сохраним рабочую копию. Диагностика дешевле религиозной войны CMS.",
-      "challenge": "Миграцию поддержу, если конкретные требования нельзя разумно выполнить и поддерживать на текущем сайте.",
+      "text": "A fashionable new stack will not deliver a missing email by magic. Walk the form from a phone to the inbox and keep a working backup. Diagnosis costs less than a holy war about the CMS.",
+      "challenge": "I will support a migration when specific requirements cannot reasonably be implemented and maintained on the current site.",
       "stance": "conditional",
       "evidenceIds": [
         "demo-leads"
@@ -193,11 +193,12 @@
       "id": "challenge-darren",
       "seat": "darren",
       "round": "challenge",
-      "text": "Kate права: точный профиль бесполезен, если пациент после перехода не понимает услугу. Объединим проверку профиля и одной посадочной, сохранив отдельные показатели.",
-      "challenge": "Изменю приоритет, если профиль уже точен, заметен по нужным запросам и приводит квалифицированные обращения.",
-      "stance": "conditional",
+      "text": "Neil, measurement matters, but the wrong opening hours can lose a patient today. I want profile verification alongside form QA, not parked behind a tracking project. Kate's page work only helps after the patient reaches it.",
+      "challenge": "I will change priorities if the profile is already accurate, visible for relevant searches and producing qualified enquiries.",
+      "stance": "challenge",
       "evidenceIds": [
-        "demo-profile"
+        "demo-profile",
+        "demo-leads"
       ],
       "fictional": true
     },
@@ -205,9 +206,9 @@
       "id": "challenge-harry",
       "seat": "harry",
       "round": "challenge",
-      "text": "Edward прав насчёт покупательского намерения. Но не будем угадывать техническую проблему: сначала проверка рендера и директив, затем исправление только подтверждённых ошибок.",
-      "challenge": "Нужна выборка исходного HTML, рендера и содержательных отличий; один шаблон сам по себе ещё не нарушение.",
-      "stance": "conditional",
+      "text": "Edward, intent is a sensible bet; a technical diagnosis still needs a test. I will not put 'fix indexation' on this plan until we inspect directives and rendering. Duplicate phrasing is a content observation, not an indexation verdict.",
+      "challenge": "Show sampled source HTML, rendered content and meaningful page differences. A repeated template is not automatically a search-policy violation.",
+      "stance": "challenge",
       "evidenceIds": [
         "demo-pages",
         "google-content"
@@ -218,9 +219,9 @@
       "id": "challenge-edward",
       "seat": "edward",
       "round": "challenge",
-      "text": "Neil справедливо требует качество лидов. Мой эксперимент не про прирост трафика любой ценой: одна услуга, релевантный запрос и проверяемая запись.",
-      "challenge": "Поддержу широкий контент, если исследования спроса покажут, что он помогает человеку выбрать и записаться.",
-      "stance": "conditional",
+      "text": "Neil, I accept the lead-quality gate. I still disagree with waiting for perfect attribution before researching demand. Let one high-intent query and a booking path define a small page experiment while measurement is being checked.",
+      "challenge": "I will support broader content when demand research shows how it helps a patient choose and book.",
+      "stance": "challenge",
       "evidenceIds": [
         "demo-pages",
         "demo-leads"
@@ -231,11 +232,12 @@
       "id": "challenge-neil",
       "seat": "neil",
       "round": "challenge",
-      "text": "TJ прав: одному AI-ответу нельзя назначать бюджет. Сначала измерения и рабочая форма, затем ограниченный тест AI-видимости рядом с обычным поиском.",
-      "challenge": "Если заявки уже доходят и превращаются в записи, можно обсуждать масштабирование привлечения.",
-      "stance": "conditional",
+      "text": "TJ, an AI visibility dashboard is a distraction if the form drops enquiries. Keep the AI sample small and behind conversion QA. I would fund a verified path to an appointment before chasing a mention in one answer.",
+      "challenge": "If enquiries already arrive and become appointments, we can discuss scaling acquisition.",
+      "stance": "challenge",
       "evidenceIds": [
-        "demo-leads"
+        "demo-leads",
+        "demo-ai"
       ],
       "fictional": true
     },
@@ -243,9 +245,9 @@
       "id": "challenge-tj",
       "seat": "tj",
       "round": "challenge",
-      "text": "Dan прав: новый стек сам по себе ничего не доказывает. Снимем миграцию с первого этапа; исследуем цитируемые источники и качество информации без перестройки сайта.",
-      "challenge": "Данные о реальном пути пациентов могут показать, что AI сейчас вообще не главный канал.",
-      "stance": "conditional",
+      "text": "Dan, agreed on testing the existing stack. Neil, I will keep AI work bounded, but a repeatable source sample is research, not a site rebuild. We can learn whether it deserves a budget without promising citations.",
+      "challenge": "Evidence about actual patient journeys may show that AI is not an important channel for this clinic yet.",
+      "stance": "challenge",
       "evidenceIds": [
         "demo-ai",
         "google-ai"
@@ -256,9 +258,9 @@
       "id": "challenge-joshua",
       "seat": "joshua",
       "round": "challenge",
-      "text": "У Neil хороший приоритет, но без определения квалифицированного обращения даже исправленная цель может обманывать. Ответственный должен сверить заявку с реальным запросом пациента.",
-      "challenge": "Для распределения бюджета нужны расходы, корректные конверсии и качество обращений; сейчас этого нет.",
-      "stance": "conditional",
+      "text": "Neil, a working form is necessary, but a fired conversion can still be junk. Someone must reconcile test delivery with real patient intent. I want a written definition of a qualified enquiry before we celebrate an improved conversion rate.",
+      "challenge": "Budget decisions need spend, valid conversions and enquiry quality. Those inputs are missing.",
+      "stance": "challenge",
       "evidenceIds": [
         "demo-leads"
       ],
@@ -268,9 +270,9 @@
       "id": "challenge-kate",
       "seat": "kate",
       "round": "challenge",
-      "text": "Harry прав: внешняя репутация не отменяет доступность сайта. Я поддерживаю короткую техническую проверку, но после неё работаем над содержанием и записью, а не бесконечным списком мелочей.",
-      "challenge": "Если страница уже отвечает на эти вопросы и хорошо конвертирует релевантный трафик, проблема выше по воронке.",
-      "stance": "conditional",
+      "text": "Harry, a short technical check earns its place. An endless checklist does not. Once the page works and is accessible, the next release should answer patient questions and make booking clear, not chase cosmetic audit points.",
+      "challenge": "If the page already answers those questions and converts relevant visitors, the problem may be further up the funnel.",
+      "stance": "challenge",
       "evidenceIds": [
         "demo-pages",
         "demo-leads"
@@ -281,9 +283,9 @@
       "id": "challenge-dan",
       "seat": "dan",
       "round": "challenge",
-      "text": "TJ уточнил условия — согласен. Создадим воспроизводимую проверку формы, внесём одно изменение в staging и пройдём тот же путь после него.",
-      "challenge": "Миграцию поддержу, если конкретные требования нельзя разумно выполнить и поддерживать на текущем сайте.",
-      "stance": "conditional",
+      "text": "TJ, that scope works. My objection is to treating a platform change as the intervention. Keep the URL, make one reversible change in staging, and replay the same form test afterward so we can tell what changed.",
+      "challenge": "I will support a migration when specific requirements cannot reasonably be implemented and maintained on the current site.",
+      "stance": "challenge",
       "evidenceIds": [
         "demo-leads"
       ],
@@ -293,9 +295,9 @@
       "id": "vote-darren",
       "seat": "darren",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: локальный поиск.",
-      "challenge": "Изменю приоритет, если профиль уже точен, заметен по нужным запросам и приводит квалифицированные обращения.",
-      "stance": "support",
+      "text": "Test, with a condition: verify the profile in parallel with measurement. Local accuracy is part of the patient's route to the clinic, not a reward we unlock after the dashboard is perfect.",
+      "challenge": "I will change priorities if the profile is already accurate, visible for relevant searches and producing qualified enquiries.",
+      "stance": "conditional",
       "evidenceIds": [
         "demo-profile"
       ],
@@ -305,8 +307,8 @@
       "id": "vote-harry",
       "seat": "harry",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: техника и авторитет.",
-      "challenge": "Нужна выборка исходного HTML, рендера и содержательных отличий; один шаблон сам по себе ещё не нарушение.",
+      "text": "Test one service page after a short crawl-and-render check. I will own the technical acceptance list and keep every unverified indexation claim out of the final report.",
+      "challenge": "Show sampled source HTML, rendered content and meaningful page differences. A repeated template is not automatically a search-policy violation.",
       "stance": "support",
       "evidenceIds": [
         "demo-pages",
@@ -318,9 +320,9 @@
       "id": "vote-edward",
       "seat": "edward",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: спрос и распространение.",
-      "challenge": "Поддержу широкий контент, если исследования спроса покажут, что он помогает человеку выбрать и записаться.",
-      "stance": "support",
+      "text": "Test one page against a researched booking-intent query. I still want demand research to start early; 'measure first' must not turn into 'learn nothing about the market for a month.'",
+      "challenge": "I will support broader content when demand research shows how it helps a patient choose and book.",
+      "stance": "conditional",
       "evidenceIds": [
         "demo-pages",
         "demo-leads"
@@ -331,8 +333,8 @@
       "id": "vote-neil",
       "seat": "neil",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: экономика роста.",
-      "challenge": "Если заявки уже доходят и превращаются в записи, можно обсуждать масштабирование привлечения.",
+      "text": "Test, then decide on scale. First validate enquiry delivery and quality. More content becomes a business choice once we can connect it to meaningful patient outcomes.",
+      "challenge": "If enquiries already arrive and become appointments, we can discuss scaling acquisition.",
       "stance": "support",
       "evidenceIds": [
         "demo-leads"
@@ -343,8 +345,8 @@
       "id": "vote-tj",
       "seat": "tj",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: ai-поиск и системы.",
-      "challenge": "Данные о реальном пути пациентов могут показать, что AI сейчас вообще не главный канал.",
+      "text": "Test the page; keep AI visibility exploratory. My deliverable is a repeatable observation log, not a promised mention, ranking or new platform.",
+      "challenge": "Evidence about actual patient journeys may show that AI is not an important channel for this clinic yet.",
       "stance": "support",
       "evidenceIds": [
         "demo-ai",
@@ -356,8 +358,8 @@
       "id": "vote-joshua",
       "seat": "joshua",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: измерения и привлечение.",
-      "challenge": "Для распределения бюджета нужны расходы, корректные конверсии и качество обращений; сейчас этого нет.",
+      "text": "Test with a written baseline and decision rule. We can accept the implementation in two weeks; we cannot guarantee that two weeks provides enough data for a commercial conclusion.",
+      "challenge": "Budget decisions need spend, valid conversions and enquiry quality. Those inputs are missing.",
       "stance": "support",
       "evidenceIds": [
         "demo-leads"
@@ -368,8 +370,8 @@
       "id": "vote-kate",
       "seat": "kate",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: контент и конверсия.",
-      "challenge": "Если страница уже отвечает на эти вопросы и хорошо конвертирует релевантный трафик, проблема выше по воронке.",
+      "text": "Test a page that earns a booking: specific treatment information, a credible practitioner and an accessible next step. The clinic must verify every medical statement.",
+      "challenge": "If the page already answers those questions and converts relevant visitors, the problem may be further up the funnel.",
       "stance": "support",
       "evidenceIds": [
         "demo-pages",
@@ -381,8 +383,8 @@
       "id": "vote-dan",
       "seat": "dan",
       "round": "verdict",
-      "text": "Поддерживаю ограниченный эксперимент: сначала проверяемая заявка, затем одна сильная страница услуги. Моя зона ответственности: wordpress и внедрение.",
-      "challenge": "Миграцию поддержу, если конкретные требования нельзя разумно выполнить и поддерживать на текущем сайте.",
+      "text": "Test on the existing site with a backup and a reversible release. A passing mobile-to-inbox check is acceptance evidence. A new framework is not.",
+      "challenge": "I will support a migration when specific requirements cannot reasonably be implemented and maintained on the current site.",
       "stance": "support",
       "evidenceIds": [
         "demo-leads"
@@ -393,13 +395,13 @@
   "actions": [
     {
       "id": "measure-leads",
-      "title": "Проверить путь от формы до квалифицированного обращения",
-      "why": "Сейчас нельзя отличить реальный запрос пациента от технического клика.",
+      "title": "Verify the path from form to qualified enquiry",
+      "why": "We cannot distinguish a real patient request from a technical click.",
       "priority": "P1",
       "confidence": "high",
-      "owner": "Аналитик + разработчик",
-      "effort": "1–2 рабочих дня",
-      "acceptance": "Тестовые заявки доходят; события не дублируются; определение квалифицированного обращения записано; персональные данные не попадают в публичный отчёт.",
+      "owner": "Analyst + developer",
+      "effort": "1–2 working days",
+      "acceptance": "Test enquiries arrive, events do not duplicate, the qualified-enquiry definition is documented, and personal data stays out of the public report.",
       "evidenceIds": [
         "demo-leads"
       ],
@@ -407,35 +409,35 @@
     },
     {
       "id": "service-page",
-      "title": "Переработать одну страницу приоритетной услуги",
-      "why": "На повторяющемся общем тексте трудно проверить, помогает ли страница выбрать клинику.",
+      "title": "Rework one priority service page",
+      "why": "Repeated generic text makes it hard to test whether the page helps a patient choose the clinic.",
       "priority": "P1",
       "confidence": "medium",
-      "owner": "Редактор + специалист клиники",
-      "effort": "3–5 рабочих дней",
-      "acceptance": "Проверены медицинские факты, различия услуги, сведения о специалисте, условия обращения и доступная форма; URL сохранён.",
+      "owner": "Editor + clinic specialist",
+      "effort": "3–5 working days",
+      "acceptance": "Medical facts, service details, practitioner information, booking conditions and accessible form are verified; the URL is preserved.",
       "evidenceIds": [
         "demo-pages",
         "google-content"
       ],
       "experiment": {
-        "baseline": "Сначала зафиксировать релевантные посещения, валидные обращения и объём данных.",
-        "change": "Изменить содержание и путь записи на одной странице услуги.",
-        "measure": "Квалифицированные обращения и их доля среди релевантных визитов; фиксировать источники трафика.",
-        "success": "До запуска согласовать минимальный бизнес-эффект и достаточность выборки; не назначать результат задним числом.",
-        "stop": "Откатить при сломанной форме, фактической ошибке или ухудшении доступности.",
-        "window": "Первые 14 дней — техническая проверка; бизнес-вывод после достаточного объёма данных с учётом сезонности."
+        "baseline": "Record relevant visits, valid enquiries and available sample size before changing the page.",
+        "change": "Change content and the booking path on one service page.",
+        "measure": "Qualified enquiries and their share of relevant visits, with traffic sources recorded.",
+        "success": "Agree the minimum useful business effect and sample requirements before launch; do not define success after seeing the result.",
+        "stop": "Roll back for broken delivery, factual errors or degraded accessibility.",
+        "window": "The first 14 days cover implementation QA. Make a business decision only after sufficient data, accounting for seasonality."
       }
     },
     {
       "id": "verify-profile",
-      "title": "Сверить профиль, услуги и контактные данные",
-      "why": "Разные сведения мешают человеку доверять компании и связаться с ней.",
+      "title": "Reconcile the profile, services and contact details",
+      "why": "Conflicting information can make it harder to trust or contact the business.",
       "priority": "P1",
       "confidence": "medium",
-      "owner": "Ответственный за локальный поиск",
-      "effort": "Один рабочий день",
-      "acceptance": "Данные сверены с владельцем и сайтом; исправления проверены после сохранения; подтверждения сохранены.",
+      "owner": "Local search owner",
+      "effort": "One working day",
+      "acceptance": "Details are confirmed with the owner and website; saved changes are checked and evidence is retained.",
       "evidenceIds": [
         "demo-profile"
       ],
@@ -443,13 +445,13 @@
     },
     {
       "id": "ai-baseline",
-      "title": "Собрать повторяемую выборку AI-ответов",
-      "why": "Один промпт не показывает весь канал; сначала нужен наблюдаемый ориентир.",
+      "title": "Build a repeatable sample of AI answers",
+      "why": "One prompt cannot represent a channel. Establish an observable baseline first.",
       "priority": "P2",
       "confidence": "low",
-      "owner": "SEO-аналитик",
-      "effort": "После проверки конверсий",
-      "acceptance": "Для каждого ответа записаны вопрос, движок, дата, контекст, упоминания и ссылки. Отсутствие данных не названо нулевой видимостью.",
+      "owner": "SEO analyst",
+      "effort": "After conversion QA",
+      "acceptance": "For each answer, record query, engine, date, context, mentions and links. Missing data is never reported as zero visibility.",
       "evidenceIds": [
         "demo-ai",
         "google-ai"
@@ -459,9 +461,9 @@
   ],
   "verdict": {
     "decision": "test",
-    "summary": "Начать с измерений и одной сильной страницы услуги. Масштабирование блога отложить до проверки спроса, качества обращений и содержания.",
-    "dissent": "Edward хочет раньше проверить новый покупательский запрос; Darren ставит точность локального профиля рядом с измерениями. Оба возражения сохранены как условия первого этапа.",
-    "unknowns": "Реальные запросы, доступность страниц, данные GSC/GA4, конверсия в запись, экономика услуги и роль AI в выборе пациента неизвестны.",
+    "summary": "Start with reliable measurement and one useful service page. Defer blog expansion until demand, enquiry quality and content usefulness have been tested.",
+    "dissent": "Edward wants booking-intent research to start earlier. Darren puts profile accuracy alongside measurement. Keep both conditions in the first phase rather than hiding them behind a unanimous vote.",
+    "unknowns": "Real search demand, page accessibility, GSC/GA4 data, appointment conversion, service economics and the role of AI in patient choice are unknown.",
     "evidenceIds": [
       "demo-pages",
       "demo-leads",

@@ -55,8 +55,11 @@ for (const e of experts) {
   assert(png.readUInt32BE(16) >= 1000);
   assert(png.readUInt32BE(20) >= 1000);
 }
-validateSession(await json(`${base}/examples/demo.json`));
+const demo = validateSession(await json(`${base}/examples/demo.json`));
+assert.equal(demo.language, 'en', 'The shipped demo must default to English');
+assert(experts.every((expert) => !Object.keys(expert).some((key) => key.endsWith('Ru'))));
 const html = await read(`${base}/room/index.html`);
+assert(html.includes('lang="en"'), 'The packaged interface must declare English');
 for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^"?#]+)"/g))
   await fs.access(path.join(root, base, 'room', match[1]));
 for (const p of [
