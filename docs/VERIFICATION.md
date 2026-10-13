@@ -8,6 +8,10 @@ New regressions launch the actual CLI on an available port, verify its JSON read
 
 The startup/opening requirement is a skill workflow, not a client-level automatic launch hook. A host can queue or deny its browser panel; the skill must report that state and provide a usable local URL. Hosted Actions remains a separate account-level blocker tracked in #2; local results do not establish hosted success.
 
+Published [v0.2.1](https://github.com/offflinerpsy/seo-roast-room/releases/tag/v0.2.1) from merged [PR #8](https://github.com/offflinerpsy/seo-roast-room/pull/8), commit `8b1513a`. Marketplace installation and enabled namespaced skill discovery both report v0.2.1. All 40 installed skill/manifest files match source SHA-256 hashes. Installed health/HTML/bundle/portrait and a Chromium next-turn interaction pass. An existing real case was recovered in the visible Codex browser without altering its session; private evidence is excluded from publication.
+
+Release archive: 12,742,241 bytes, local/GitHub SHA-256 `a5c510d1ca769aabdd460f450dbca9645873d02e29bcf6e07edc761f62d2216a`. [Hosted run 38380281688](https://github.com/offflinerpsy/seo-roast-room/actions/runs/38380281688) remains blocked before job steps by the same account-level restriction.
+
 ## v0.2.0 baseline
 
 Date: **2026-10-13**. Tests use synthetic data. No client website was audited to produce the demonstration.
