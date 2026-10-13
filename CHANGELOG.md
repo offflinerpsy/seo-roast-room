@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 — 2026-10-13
+
+- Open the visual room by default before extended research, with a clickable link to the exact council and explicit handling of queued browser panels.
+- Add `serve --session ID --json` readiness output, including the actual URL, session directory and process ID; support available-port selection with `--port 0`.
+- Preserve selected sessions in the URL across reloads, choose recent real work over the demo, and report unavailable links without silently substituting a different case.
+- Focus the latest real contribution on entry and publish contributions incrementally through the skill workflow.
+- Cover CLI startup, missing IDs, direct links, reloads and recovery with regression tests.
+
 ## 0.2.0 — 2026-10-13
 
 - Original strategy arena: octagonal wood-and-felt table, paper evidence deck, animated speaker cues and challenge stamps driven by published turns.

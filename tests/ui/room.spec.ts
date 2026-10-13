@@ -7,7 +7,7 @@ import { SessionStore } from '../../skills/seo-roast/lib/store.mjs';
 test('evidence moves with the real speaker; replay, challenges and reduced motion remain controllable', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/?session=demo');
   await expect(page.locator('.round-ribbon')).toContainText('Darren Shaw has the floor');
   await page.getByRole('button', { name: 'Next turn', exact: true }).click();
   await expect(page.locator('.round-ribbon')).toContainText('Harry Sanders has the floor');
@@ -43,7 +43,7 @@ test('desktop and mobile show all portraits without overflow; sources, dossiers 
   await mkdir('.local/evidence', { recursive: true });
   for (const width of [1440, 1024, 768, 390, 320]) {
     await page.setViewportSize({ width, height: 1000 });
-    await page.goto('/');
+    await page.goto('/?session=demo');
     await expect(page.locator('.expert-seat')).toHaveCount(8);
     await expect(page.locator('.connection')).toContainText('connected');
     await page.evaluate(() =>
@@ -87,7 +87,7 @@ test('desktop and mobile show all portraits without overflow; sources, dossiers 
 });
 test('new brief remains pending and provides a real Codex handoff', async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem('roast-language', 'ru'));
-  await page.goto('/');
+  await page.goto('/?session=demo');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   await page.getByRole('button', { name: /New roast/ }).click();
   await page.getByLabel('Title', { exact: true }).fill('UI canary — do not publish');
@@ -109,9 +109,12 @@ test('new brief remains pending and provides a real Codex handoff', async ({ pag
   const saved = await (await page.request.get(`/api/sessions/${summary.id}`)).json();
   expect(saved.language).toBe('Spanish');
   await expect(page.locator('.arena')).not.toHaveClass(/is-presenting/);
+  await expect(page).toHaveURL(new RegExp(`session=${saved.id}$`));
+  await page.reload();
+  await expect(page.locator('.brief-bar')).toContainText(saved.title);
 });
 test('print includes the entire report even during a partial replay', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?session=demo');
   await page.getByRole('button', { name: 'Play debate' }).click();
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('.app-shell')).toBeHidden();
@@ -122,7 +125,7 @@ test('print includes the entire report even during a partial replay', async ({ p
   await expect(page.locator('.print-report')).toContainText('not actual statements');
 });
 test('demo replay remains labeled and reveals turns', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?session=demo');
   await page.getByRole('button', { name: 'Play debate' }).click();
   await expect(page.locator('.turn')).toHaveCount(1);
   await expect(page.locator('.turn')).toHaveCount(2, { timeout: 7000 });
@@ -135,7 +138,7 @@ test('published council updates appear live without reloading the browser', asyn
   page,
   request,
 }) => {
-  await page.goto('/');
+  await page.goto('/?session=demo');
   await page.getByRole('button', { name: /New roast/ }).click();
   await page.getByLabel('Title', { exact: true }).fill('Live update canary');
   await page.getByLabel('URL and council question').fill('Synthetic live publishing check.');
@@ -164,4 +167,44 @@ test('published council updates appear live without reloading the browser', asyn
   expect(report).toContain(fixture.turns[23].text);
   await page.getByRole('tab', { name: /Action plan/ }).click();
   await expect(page.locator('.action')).toHaveCount(4);
+});
+
+test('room links select the real case, bare links choose recent work, and missing cases stay explicit', async ({
+  page,
+  request,
+}) => {
+  const bootstrap = await (await request.get('/api/bootstrap')).json();
+  const fixture = JSON.parse(
+    await readFile(path.resolve('skills/seo-roast/examples/demo.json'), 'utf8'),
+  );
+  const store = await new SessionStore(bootstrap.sessionDirectory).init();
+  const session = {
+    ...fixture,
+    id: 'deep-link-canary',
+    title: 'Exact session link canary',
+    demo: false,
+    updatedAt: new Date().toISOString(),
+  };
+  await store.create(session);
+  await page.goto('/?session=deep-link-canary');
+  await expect(page.locator('.brief-bar')).toContainText(session.title);
+  await expect(page.locator('.room-indicator')).toContainText('CASE CLOSED');
+  await expect(page.locator('.round-ribbon')).toContainText('Dan Davies has the floor');
+  await page.reload();
+  await expect(page.locator('.brief-bar')).toContainText(session.title);
+  await page.goto('/');
+  await expect(page).toHaveURL(/session=deep-link-canary$/);
+  await expect(page.locator('.brief-bar')).toContainText(session.title);
+  await page.goto('/?session=missing-case');
+  await expect(
+    page.getByRole('heading', { name: 'Session unavailable', exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Linked session is unavailable in this room.', { exact: false }),
+  ).toBeVisible();
+  await expect(page.locator('.arena')).toHaveCount(0);
+  await expect(page).toHaveURL(/session=missing-case$/);
+  await page.locator('.session-list button').filter({ hasText: session.title }).click();
+  await expect(page).toHaveURL(/session=deep-link-canary$/);
+  await expect(page.locator('.brief-bar')).toContainText(session.title);
 });

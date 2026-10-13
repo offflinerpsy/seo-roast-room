@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "seo-roast-room",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Eight source-grounded SEO expert simulations debate your strategy in a live local room, then deliver evidence, dissent, and testable actions. Built for Codex.",
   "author": { "name": "Alex Yarosh", "url": "https://base2026.dev" },
   "homepage": "https://github.com/offflinerpsy/seo-roast-room",

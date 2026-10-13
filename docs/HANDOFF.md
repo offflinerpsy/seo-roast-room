@@ -3,6 +3,9 @@
 Updated: 2026-10-13 (Europe/Minsk)
 Canonical project: seo-roast-room. Repo files and current Git state are authoritative.
 
+## Active UX recovery — room-first launch
+The owner invoked the plugin in another chat and saw only ordinary chat output. The existing private room was recovered without modifying its research or messaging the other chat. Its owned viewer stays alive for review; process/URL/session details remain in ignored local evidence. The permanent fix now makes startup/opening the default, adds exact-session navigation and preserves selection on reload. Windows 21 passes/2 OS skips, Linux 23 passes, Chromium 7 passes, build/types/format/package checks pass. GitHub #7 / AGR-105 track the fix. Next: publish and install v0.2.1, verify the installed package, then replace only the owned recovery server on the same local port. All public changes remain English. Rollback baseline: v0.2.0. Branch: codex/room-first-launch.
+
 ## Delivered
 v0.2.0 is published: https://github.com/offflinerpsy/seo-roast-room/releases/tag/v0.2.0
 Repository: https://github.com/offflinerpsy/seo-roast-room
@@ -46,7 +49,7 @@ Start a fresh Codex chat and invoke $seo-roast-room:seo-roast. Standalone skill 
 Marketplace: base2026-seo. Installed cache: ~/.codex/plugins/cache/base2026-seo/seo-roast-room/0.2.0.
 Update only this marketplace with codex plugin marketplace upgrade base2026-seo, then codex plugin add seo-roast-room@base2026-seo.
 Previous stable source: v0.1.0. Private session schema remains compatible. A pre-install config backup exists under ignored .local/protected/; never publish it.
-All owned server/browser/app-server processes have closed. No paid runner or continuous automation installed.
+Temporary QA server/browser/app-server processes close after verification. The active recovery viewer is intentionally retained for the owner; its exact stop command is recorded privately. No paid runner or continuous automation installed.
 
 ## Protected areas
 Preserve Base2026 production, global provider/auth settings, unrelated projects, owner browser sessions and other Linear work. Keep client evidence, credentials, raw transcripts and private sessions outside Git. Never imply actual creator participation or endorsement. No promises of rankings, indexation, AI citations or revenue.

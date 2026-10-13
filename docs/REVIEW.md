@@ -1,5 +1,11 @@
 # Initial implementation review
 
+## v0.2.1 follow-up
+
+The skill's optional room startup was a usability defect: an invocation could produce ordinary chat without showing the product. Startup now precedes extended research and includes exact-directory verification, an exact-session link, explicit queued-panel handling and ownership-aware process cleanup. The viewer persists valid session selection and never substitutes the demo for an unavailable explicit link. Real cases focus the latest published contribution; the demo still starts at its first turn.
+
+Inspection and regressions cover missing/unsafe IDs before listening, actual ephemeral-port readiness, private paths containing spaces, refresh persistence, recent-session defaults, sidebar recovery, existing SSE publication and unchanged session validation/security boundaries. No model endpoint, dependency or session migration was introduced. Browser opening remains dependent on host capabilities and is not falsely described as a guaranteed hook.
+
 ## v0.2.0 follow-up
 
 English presentation and multilingual output are independent. The old persisted RU interface choice cannot override the English product default. Language values are bounded and reject control characters; legacy session values remain valid. No private-session migration or translation is performed.

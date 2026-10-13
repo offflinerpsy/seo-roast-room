@@ -20,7 +20,7 @@ cd seo-roast-room
 npm start
 ```
 
-Open **http://127.0.0.1:4740**. The clearly labeled fictional demo lets you inspect the full council immediately. `Ctrl+C` stops the room.
+Open **http://127.0.0.1:4740**. The room opens your most recently updated real session, or the clearly labeled fictional demo if there are no sessions yet. Use **http://127.0.0.1:4740/?session=demo** to open the demo explicitly. `Ctrl+C` stops the room.
 
 ### Install in Codex
 
@@ -44,10 +44,19 @@ Use $seo-roast-room:seo-roast in quick mode to review https://example.com.
 We sell [offer] to [audience] in [market].
 Our objective is [qualified enquiries / sales / another outcome].
 Constraints: [time, team, budget]. Available evidence: [files/tools].
-Start the room so I can follow the debate.
 ```
 
-Or create a brief in the room and paste its generated instruction into Codex. The instruction includes the exact session directory, including a custom `--sessions` path. The room waits for Codex to research and publish the rounds. It never fakes a live model response or runs a shell from a web request.
+The skill opens the visual room by default, before extended research, and gives you a link to your exact session. Codex performs the research in chat; the table displays each published contribution and its evidence. In Codex Desktop, the room opens in a browser panel when available. If the host queues or cannot display the panel, use the clickable room link. Ask for a **text-only council** to skip the viewer.
+
+Or create a brief in the room and paste its generated instruction into Codex. The instruction includes the exact session directory, including a custom `--sessions` path. The room waits for Codex to research and publish contributions. It never fakes a live model response or runs a shell from a web request.
+
+If you see only chat, ask Codex to open the room for the existing session; a new analysis is unnecessary. For manual recovery, run the CLI from the skill installation with the same absolute session directory:
+
+```sh
+node skills/seo-roast/scripts/roast.mjs serve --sessions "/absolute/path/to/.seo-roast/sessions" --session SESSION-ID --port 0 --json
+```
+
+Open the returned `url`. Port `0` selects a free local port. Session links survive reloads; a missing session produces an explicit error instead of silently showing another case. The room remains available while its local server process runs.
 
 The optional **Response language** field accepts a language name or tag, such as `Spanish`, `Arabic` or `pt-BR`. Leave it blank to match your request. Existing sessions are preserved. To update an installed plugin, run `codex plugin marketplace upgrade base2026-seo`, then `codex plugin add seo-roast-room@base2026-seo` and start a fresh chat.
 

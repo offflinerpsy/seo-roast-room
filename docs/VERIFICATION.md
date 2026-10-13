@@ -1,4 +1,14 @@
-# v0.2.0 verification
+# Verification
+
+## v0.2.1 — room startup and session links
+
+Date: **2026-10-13**. Windows Node 24.9.0: 21 runtime/CLI passes and 2 OS capability skips. Ubuntu WSL Node 22.23.3: all 23 pass. Chromium: all 7 scenarios pass. Build/types, formatting and package checks pass. Desktop/mobile screenshots at 320/390/768/1024/1440 px were regenerated; desktop and mobile reviewed, with no horizontal overflow.
+
+New regressions launch the actual CLI on an available port, verify its JSON readiness URL/directory/PID and actual session endpoint, and reject missing/unsafe session IDs before a server starts. Browser checks cover exact-case navigation, reload persistence, recent real work as the default, explicit unavailable links, sidebar recovery and latest-contribution focus. Existing live publication, language, evidence, export and motion regressions remain passing.
+
+The startup/opening requirement is a skill workflow, not a client-level automatic launch hook. A host can queue or deny its browser panel; the skill must report that state and provide a usable local URL. Hosted Actions remains a separate account-level blocker tracked in #2; local results do not establish hosted success.
+
+## v0.2.0 baseline
 
 Date: **2026-10-13**. Tests use synthetic data. No client website was audited to produce the demonstration.
 

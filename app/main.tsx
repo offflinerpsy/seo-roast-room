@@ -51,7 +51,9 @@ function App() {
   const [experts, setExperts] = useState<Expert[]>([]);
   const [summaries, setSummaries] = useState<Summary[]>([]);
   const [session, setSession] = useState<Session | null>(null);
-  const [selectedId, setSelectedId] = useState('demo');
+  const [selectedId, setSelectedId] = useState(
+    () => new URLSearchParams(window.location.search).get('session') || '',
+  );
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
   const [connected, setConnected] = useState(false);
@@ -87,7 +89,9 @@ function App() {
         sessions: Summary[];
         errors: { id: string }[];
       }>('/api/bootstrap');
-      const chosenId = data.sessions.some((s) => s.id === id) ? id : data.sessions[0]?.id;
+      const chosenId = id
+        ? data.sessions.find((s) => s.id === id)?.id
+        : (data.sessions.find((s) => !s.demo)?.id ?? data.sessions[0]?.id);
       const full = chosenId ? await api<Session>(`/api/sessions/${chosenId}`) : null;
       if (serial !== requestId.current) return;
       setExperts(data.experts);
@@ -96,15 +100,22 @@ function App() {
       setSummaries(data.sessions);
       setSession(full);
       if (chosenId && chosenId !== id) setSelectedId(chosenId);
+      if (full) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('session', full.id);
+        window.history.replaceState(null, '', url);
+      }
       setError(
-        data.errors.length
-          ? `${data.errors.length} ${'invalid sessions: validate JSON with the CLI.'}`
-          : '',
+        id && !chosenId
+          ? 'Linked session is unavailable in this room. Select a session from the sidebar or open the room that owns this link.'
+          : data.errors.length
+            ? `${data.errors.length} invalid sessions: validate JSON with the CLI.`
+            : '',
       );
       if (initial || previous.current?.id !== full?.id) {
         setVisibleCount(null);
         setPlaying(false);
-        setActiveTurn(full?.turns[0] || null);
+        setActiveTurn((full?.demo ? full.turns[0] : full?.turns.at(-1)) || null);
         setPresenting(false);
       } else if (full && !full.demo && full.turns.length > (previous.current?.turns || 0)) {
         setActiveTurn(full.turns.at(-1) || null);
@@ -419,9 +430,13 @@ function App() {
             {!session ? (
               <div className="empty-room">
                 <Fire size={36} />
-                <h2>{'The council is ready for your question'}</h2>
+                <h2>
+                  {selectedId ? 'Session unavailable' : 'The council is ready for your question'}
+                </h2>
                 <p>
-                  {'Describe a site or a decision. Codex will gather evidence and run the review.'}
+                  {selectedId
+                    ? 'Choose an available session from the sidebar, or start a new brief.'
+                    : 'Describe a site or a decision. Codex will gather evidence and run the review.'}
                 </p>
                 <button className="primary" onClick={() => setModal('new')}>
                   {'Start a roast'}
