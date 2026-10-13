@@ -12,6 +12,15 @@ const pkg = await json('package.json');
 const market = await json('.agents/plugins/marketplace.json');
 assert.equal(plugin.name, pkg.name);
 assert.equal(plugin.version, pkg.version);
+const compatibility = await json('.codex-plugin/plugin.json');
+assert.equal(compatibility.name, plugin.name);
+assert.equal(compatibility.version, plugin.version);
+assert.equal(compatibility.skills, './skills/');
+assert.equal(compatibility.mcpServers, './.mcp.json');
+assert.equal(
+  (await json('.mcp.json')).mcpServers['base2026-public'].url,
+  'https://base2026.dev/api/mcp',
+);
 assert.equal(market.plugins[0].name, plugin.name);
 assert.equal(market.plugins[0].source.path, './');
 assert.equal(

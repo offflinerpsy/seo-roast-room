@@ -1,0 +1,21 @@
+{
+  "name": "seo-roast-room",
+  "version": "0.1.0",
+  "description": "Eight source-grounded SEO expert simulations debate your strategy in a live local room and deliver testable actions.",
+  "author": { "name": "Alex Yarosh", "url": "https://base2026.dev" },
+  "homepage": "https://github.com/offflinerpsy/seo-roast-room",
+  "repository": "https://github.com/offflinerpsy/seo-roast-room",
+  "license": "MIT",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "SEO Roast Room",
+    "shortDescription": "Eight SEO minds. Evidence over ego.",
+    "developerName": "Alex Yarosh / Base2026",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/offflinerpsy/seo-roast-room",
+    "defaultPrompt": ["Use $seo-roast to challenge my SEO strategy and build a testable plan."],
+    "brandColor": "#D58B65"
+  }
+}

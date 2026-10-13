@@ -3,7 +3,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { createSession, validateSession, MAX_BYTES } from '../lib/schema.mjs';
+import { createSession, validateSession } from '../lib/schema.mjs';
+import { readJsonBounded as readJson } from '../lib/read-json.mjs';
 import { SessionStore } from '../lib/store.mjs';
 import { startServer } from '../lib/server.mjs';
 import { searchBase2026 } from '../lib/base2026.mjs';
@@ -15,12 +16,6 @@ const option = (name) => {
   if (i === -1) return undefined;
   if (!args[i + 1] || args[i + 1].startsWith('--')) throw new Error(`Missing --${name} value`);
   return args[i + 1];
-};
-const readJson = async (file) => {
-  if (!file) throw new Error('--file is required');
-  const st = await fs.stat(file);
-  if (st.size > MAX_BYTES) throw new Error('Input too large');
-  return JSON.parse(await fs.readFile(file, 'utf8'));
 };
 try {
   const directory = path.resolve(

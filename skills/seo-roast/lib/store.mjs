@@ -1,7 +1,8 @@
 import { promises as fs, constants } from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { MAX_BYTES, safeId, validateSession } from './schema.mjs';
+import { safeId, validateSession } from './schema.mjs';
+import { readJsonBounded } from './read-json.mjs';
 
 export class SessionStore {
   constructor(directory) {
@@ -18,10 +19,7 @@ export class SessionStore {
   }
   async read(id) {
     const file = this.file(id);
-    const st = await fs.lstat(file);
-    if (!st.isFile() || st.isSymbolicLink() || st.size > MAX_BYTES)
-      throw new Error('Unsafe session file');
-    const session = validateSession(JSON.parse(await fs.readFile(file, 'utf8')));
+    const session = validateSession(await readJsonBounded(file));
     if (session.id !== id) throw new Error('Session ID does not match its filename');
     return session;
   }

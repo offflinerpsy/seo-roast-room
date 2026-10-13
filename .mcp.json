@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "base2026-public": {
+      "url": "https://base2026.dev/api/mcp"
+    }
+  }
+}
