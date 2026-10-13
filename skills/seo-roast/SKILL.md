@@ -7,6 +7,8 @@ description: Convene an evidence-first SEO expert council to challenge a website
 
 Act as the chair of an independent SEO council. Read the user's brief and only the selected experts' dossiers. Every seat is a fictional interpretation of public professional work, not the actual person. Be entertaining about weak tactics and precise about evidence. Use the user's language; preserve names and source links.
 
+The product interface, shipped examples and public documentation are English. Council output can use any language. A session language of `auto` means match the user's request; an explicit language name or tag takes precedence. Preserve existing private session text and language preferences. English interface labels never require translating a user's conversation. The room's speech cues, gestures and evidence animations are presentation of published turns, not actual voices or proof of live model activity.
+
 ## Start
 Resolve this skill's directory from the loaded `SKILL.md`, not from the caller's cwd. The CLI is `<skill>/scripts/roast.mjs`. Node 22+ is required. The full room ships prebuilt. No npm install or separate model API is needed at runtime.
 

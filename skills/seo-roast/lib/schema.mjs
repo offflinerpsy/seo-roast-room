@@ -49,7 +49,8 @@ export function validateSession(s) {
   str(s.title, 'title', 160);
   str(s.question, 'question');
   choice(s.mode, ['quick', 'council', 'consult'], 'mode');
-  choice(s.language, ['en', 'ru'], 'language');
+  str(s.language, 'language', 80);
+  need(!/[\u0000-\u001f\u007f]/.test(s.language), 'language: control characters are not allowed');
   choice(s.stage, STAGES, 'stage');
   choice(s.status, ['waiting', 'running', 'complete', 'failed'], 'status');
   need(typeof s.demo === 'boolean', 'demo must be explicit');
@@ -169,7 +170,7 @@ export function createSession(input, id, now = new Date().toISOString()) {
     question: input.question,
     context: input.context || 'No additional context supplied; scope and baseline are unknown.',
     mode: input.mode || 'quick',
-    language: input.language || 'en',
+    language: input.language || 'auto',
     seats: input.seats || ['harry', 'kate', 'tj'],
     stage: 'brief',
     status: 'waiting',

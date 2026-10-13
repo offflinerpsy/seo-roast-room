@@ -3,11 +3,8 @@ export type Expert = {
   name: string;
   handle: string;
   role: string;
-  roleRu: string;
   tagline: string;
-  taglineRu: string;
   character: string;
-  characterRu: string;
   voice: string;
   beliefs: string[];
   tension: string;

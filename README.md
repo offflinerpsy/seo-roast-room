@@ -1,8 +1,10 @@
 # SEO Roast Room
 
-**Eight SEO minds. Evidence over ego. Built for Codex.**
+**Put your strategy on the table. Eight perspectives. One testable next move.**
 
-Bring a website, a strategy, or a difficult search-growth decision. Eight distinct expert simulations challenge the assumptions, inspect the evidence, and leave you with a testable plan. A local room makes the debate visible: original cartoon portraits, speaker focus, source inspection, expert dossiers, and an action board.
+Bring a website, a strategy, or a difficult search-growth decision. Eight distinct expert simulations challenge the assumptions, inspect the evidence, and leave you with a testable plan. An original tabletop arena makes the debate visible: animated cartoon speakers, source cards dealt onto an octagonal table, challenges, expert dossiers and an action board.
+
+**English interface. Any-language conversations.** Write your brief in your language, or choose a response language. Your questions, discussion and findings keep that language; interface labels and public project materials are English.
 
 Inspired by [Roast Room](https://github.com/nateherkai/roast-room). Independently implemented for SEO and Codex, with research grounded in [Base2026](https://base2026.dev). Claude adaptation is intentionally deferred.
 
@@ -42,10 +44,12 @@ Use $seo-roast-room:seo-roast in quick mode to review https://example.com.
 We sell [offer] to [audience] in [market].
 Our objective is [qualified enquiries / sales / another outcome].
 Constraints: [time, team, budget]. Available evidence: [files/tools].
-Respond in Russian. Start the room so I can follow the debate.
+Start the room so I can follow the debate.
 ```
 
 Or create a brief in the room and paste its generated instruction into Codex. The instruction includes the exact session directory, including a custom `--sessions` path. The room waits for Codex to research and publish the rounds. It never fakes a live model response or runs a shell from a web request.
+
+The optional **Response language** field accepts a language name or tag, such as `Spanish`, `Arabic` or `pt-BR`. Leave it blank to match your request. Existing sessions are preserved. To update an installed plugin, run `codex plugin marketplace upgrade base2026-seo`, then `codex plugin add seo-roast-room@base2026-seo` and start a fresh chat.
 
 Codex namespaces the plugin skill as `seo-roast-room:seo-roast`. For the standalone copied skill, use `$seo-roast` instead.
 
@@ -73,7 +77,8 @@ These are **independent fictional AI simulations**, not the people, their statem
 - **No fake score.** Unknown data stays unknown; no mathematically dressed-up SEO grade or promised ranking lift.
 - **Implementable actions.** Owner role, effort, confidence, evidence and an acceptance check. Experiments also carry a baseline, measurement, success/stop criteria and a window.
 - **Private by default.** Local session files, no telemetry, no model API in the viewer. Public Base2026 lookup sends only selected research terms and handles.
-- **Portable.** Codex skill, Node CLI, live SSE room, JSON/Markdown export and browser print-to-PDF. Russian/English UI; stored dialogue remains in the language of its session.
+- **Playable, inspectable debate.** Follow the active speaker, open the actual cited card, step through turns, or replay the clearly labeled demo. Challenges appear when a published challenge reaches the table. Pause and reduced-motion controls keep it comfortable. No synthetic voices or fabricated activity.
+- **Portable and multilingual.** Codex skill, Node CLI, live SSE room, JSON/Markdown export and complete browser print-to-PDF. English presentation; conversation text stays in the requested language.
 
 ## Modes and cost
 

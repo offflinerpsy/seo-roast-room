@@ -3,7 +3,7 @@
 Use the executable validator in `lib/schema.mjs`. A complete worked fixture lives at `examples/demo.json`; it is fictional and must not be presented as client evidence.
 
 ## Brief input
-Required strings: `title` (max 160), `question` (max 6000). Optional `context` (max 12000), `mode` (`quick|council|consult`), `language` (`ru|en`), `seats` (known IDs; quick ≤3, consult exactly1). CLI `create` assigns ID, timestamps, revision0, empty arrays, `verdict:null`, `stage:brief`, `status:waiting`, `demo:false`.
+Required strings: `title` (max 160), `question` (max 6000). Optional `context` (max 12000), `mode` (`quick|council|consult`), `language` (a language name or tag, max 80 characters, no control characters; default `auto`), `seats` (known IDs; quick ≤3, consult exactly1). `auto` means match the user's request. Existing `en` and `ru` sessions remain valid. The interface and report headings are English; brief text, contributions and findings preserve the requested language. CLI `create` assigns ID, timestamps, revision0, empty arrays, `verdict:null`, `stage:brief`, `status:waiting`, `demo:false`.
 
 ## Session
 Fields: `schemaVersion:1`, `id`, integer `revision`, `title`, `question`, `context`, `mode`, `language`, selected `seats`, `stage` (`brief|evidence|opening|challenge|verdict`), `status` (`waiting|running|complete|failed`), boolean `demo`, ISO `createdAt/updatedAt`, string array `assumptions`, arrays `evidence/turns/actions`, and nullable `verdict`.

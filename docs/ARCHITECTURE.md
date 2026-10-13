@@ -12,6 +12,11 @@ Brief → evidence → opening arguments → challenge → verdict/actions. Code
 
 The session JSON is canonical. Markdown is generated from it. Replaying a saved session makes no model calls. A bundled fictional demonstration is clearly labeled and immutable through the viewer.
 
+## Presentation and language
+`app/room-stage.tsx` renders the tabletop arena from the selected session and turn. The speaker, evidence card, challenge stamp and round counter resolve to actual turn IDs and evidence references. Demo playback advances saved contributions; SSE moves focus to newly published real contributions. Waiting briefs never claim active model work. CSS transform/opacity animations are bounded by presentation state and can be disabled; operating-system reduced motion wins over animation styling.
+
+Product chrome, shipped metadata, demo, report headings and public project communication are English. The schema accepts `auto` or a bounded language name/tag while retaining compatibility with legacy `en` and `ru` documents. `auto` asks Codex to match the user's request. Session bodies are not translated by the viewer. Right-to-left text can determine its own direction in speaker and transcript fields. Dossiers render text and safe links without accepting raw HTML.
+
 ## Privacy
 Sessions default to the caller's workspace `.seo-roast/sessions` and are excluded from this repository. No telemetry, no API key collection. Public API requests transmit only user-selected research terms/handles; never client exports or full briefs. Source lookup failures are visible; zero results are not invented evidence.
 
