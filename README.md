@@ -22,7 +22,7 @@ Open **http://127.0.0.1:4740**. The clearly labeled fictional demo lets you insp
 
 ### Install in Codex
 
-The repository includes a portable `plugin.json`, the `seo-roast` skill and a repo marketplace. Current Codex CLI:
+The repository includes a portable `plugin.json`, a Codex compatibility manifest, the `seo-roast` skill and a repo marketplace. The compatibility manifest is needed by Codex CLI 0.145.0 to discover the skill; both layouts share exactly the same implementation. Install with:
 
 ```sh
 codex plugin marketplace add offflinerpsy/seo-roast-room
