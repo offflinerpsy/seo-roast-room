@@ -1,0 +1,12 @@
+node_modules/
+.local/
+.env
+.env.*
+!.env.example
+sessions/
+.seo-roast/
+coverage/
+test-results/
+playwright-report/
+*.log
+.DS_Store

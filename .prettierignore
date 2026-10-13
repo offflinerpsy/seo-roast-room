@@ -1,0 +1,6 @@
+node_modules
+.local
+.seo-roast
+skills/seo-roast/room
+package-lock.json
+licenses

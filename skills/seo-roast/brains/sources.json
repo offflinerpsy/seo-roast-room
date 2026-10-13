@@ -1,0 +1,356 @@
+{
+  "reviewedAt": "2026-10-13",
+  "method": "Live public Base2026 MCP; 20 recent records retrieved per selected creator; curated subset informs dossiers. Excerpts are not redistributed. Counts indicate coverage, not quality.",
+  "creators": {
+    "darren": {
+      "handle": "darrenshawseo",
+      "liveSourceCount": 169,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "darren-7673907221176175879",
+          "originalUrl": "https://www.tiktok.com/@darrenshawseo/video/7673907221176175879",
+          "base2026Id": "tiktok:darrenshawseo:7673907221176175879",
+          "publishedDate": "2026-08-14",
+          "title": "I let my GenZ marketing team write my script for a Google Business Profile audit 😬"
+        },
+        {
+          "id": "darren-7660551196687617287",
+          "originalUrl": "https://www.tiktok.com/@darrenshawseo/video/7660551196687617287",
+          "base2026Id": "tiktok:darrenshawseo:7660551196687617287",
+          "publishedDate": "2026-07-09",
+          "title": "Your Google Business Profile description could become part of an AI a..."
+        },
+        {
+          "id": "darren-7660173392812739861",
+          "originalUrl": "https://www.tiktok.com/@darrenshawseo/video/7660173392812739861",
+          "base2026Id": "tiktok:darrenshawseo:7660173392812739861",
+          "publishedDate": "2026-07-08",
+          "title": "Everyone is obsessed with getting recommended by AI. But THIS matters..."
+        }
+      ]
+    },
+    "harry": {
+      "handle": "harrysandersseo",
+      "liveSourceCount": 112,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "harry-7673404904156810512",
+          "originalUrl": "https://www.tiktok.com/@harrysandersseo/video/7673404904156810512",
+          "base2026Id": "tiktok:harrysandersseo:7673404904156810512",
+          "publishedDate": "2026-08-22",
+          "title": "I rated the things your SEO specialist might say and whether it's worth firing them over it. A few of these mean you're already be"
+        },
+        {
+          "id": "harry-7673404233378532609",
+          "originalUrl": "https://www.tiktok.com/@harrysandersseo/video/7673404233378532609",
+          "base2026Id": "tiktok:harrysandersseo:7673404233378532609",
+          "publishedDate": "2026-08-21",
+          "title": "Everyone's overcomplicating AI search. Two things to stop paying for, and three that actually move your rankings."
+        },
+        {
+          "id": "harry-7673404211022908673",
+          "originalUrl": "https://www.tiktok.com/@harrysandersseo/video/7673404211022908673",
+          "base2026Id": "tiktok:harrysandersseo:7673404211022908673",
+          "publishedDate": "2026-08-21",
+          "title": "3 skills to 10x your AI search results, and they're the same first-pass skills I run across our client work. Comment PACK and I'll"
+        },
+        {
+          "id": "harry-7673404230765481233",
+          "originalUrl": "https://www.tiktok.com/@harrysandersseo/video/7673404230765481233",
+          "base2026Id": "tiktok:harrysandersseo:7673404230765481233",
+          "publishedDate": "2026-08-21",
+          "title": "SEO isn't a replacement for paid ads, together they're 1+1=3 Paid is renting your leads, SEO is owning them, and every year paid g"
+        },
+        {
+          "id": "harry-7673402644567756048",
+          "originalUrl": "https://www.tiktok.com/@harrysandersseo/video/7673402644567756048",
+          "base2026Id": "tiktok:harrysandersseo:7673402644567756048",
+          "publishedDate": "2026-08-20",
+          "title": "my honest rating of the seo advice everyone repeats"
+        }
+      ]
+    },
+    "edward": {
+      "handle": "build_in_public",
+      "liveSourceCount": 430,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "edward-7667677267211865376",
+          "originalUrl": "https://www.tiktok.com/@build_in_public/video/7667677267211865376",
+          "base2026Id": "tiktok:build_in_public:7667677267211865376",
+          "publishedDate": "2026-07-28",
+          "title": "Red Bull's viral events and stunts as a mechanism for attracting press coverage and backlinks."
+        },
+        {
+          "id": "edward-7666938115918957857",
+          "originalUrl": "https://www.tiktok.com/@build_in_public/video/7666938115918957857",
+          "base2026Id": "tiktok:build_in_public:7666938115918957857",
+          "publishedDate": "2026-07-26",
+          "title": "Using stunts, sponsorships, events, and landing-page testing to support link earning"
+        },
+        {
+          "id": "edward-7666231125278280992",
+          "originalUrl": "https://www.tiktok.com/@build_in_public/video/7666231125278280992",
+          "base2026Id": "tiktok:build_in_public:7666231125278280992",
+          "publishedDate": "2026-07-24",
+          "title": "URL, title, and H1 alignment with ChatGPT fan-out queries"
+        }
+      ]
+    },
+    "neil": {
+      "handle": "neilpatel",
+      "liveSourceCount": 62,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "neil-7660869248989941005",
+          "originalUrl": "https://www.tiktok.com/@neilpatel/video/7660869248989941005",
+          "base2026Id": "tiktok:neilpatel:7660869248989941005",
+          "publishedDate": "2026-07-10",
+          "title": "Qonto's localization agent cut translation time up to 70% across thei..."
+        },
+        {
+          "id": "neil-7660220219343817998",
+          "originalUrl": "https://www.tiktok.com/@neilpatel/video/7660220219343817998",
+          "base2026Id": "tiktok:neilpatel:7660220219343817998",
+          "publishedDate": "2026-07-08",
+          "title": "AI rewards brands that answer the exact questions people are typing r..."
+        },
+        {
+          "id": "neil-7659756013557452046",
+          "originalUrl": "https://www.tiktok.com/@neilpatel/video/7659756013557452046",
+          "base2026Id": "tiktok:neilpatel:7659756013557452046",
+          "publishedDate": "2026-07-07",
+          "title": "measure-ai-search-visibility"
+        },
+        {
+          "id": "neil-7659385952556616974",
+          "originalUrl": "https://www.tiktok.com/@neilpatel/video/7659385952556616974",
+          "base2026Id": "tiktok:neilpatel:7659385952556616974",
+          "publishedDate": "2026-07-06",
+          "title": "Reported AI-search lead attribution and a workflow for adapting high-traffic pages with intent-matched FAQs"
+        },
+        {
+          "id": "neil-7659477921207176461",
+          "originalUrl": "https://www.tiktok.com/@neilpatel/video/7659477921207176461",
+          "base2026Id": "tiktok:neilpatel:7659477921207176461",
+          "publishedDate": "2026-07-06",
+          "title": "You can't track LTV or customer acquisition cost without a system col..."
+        }
+      ]
+    },
+    "tj": {
+      "handle": "tjrobertson52",
+      "liveSourceCount": 377,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "tj-7667726450258201869",
+          "originalUrl": "https://www.tiktok.com/@tjrobertson52/video/7667726450258201869",
+          "base2026Id": "tiktok:tjrobertson52:7667726450258201869",
+          "publishedDate": "2026-07-28",
+          "title": "Building a reusable AI-assisted internal-link optimization skill with site data, Search Console data, MCP connectors, subagents, a"
+        },
+        {
+          "id": "tj-7667360650326199565",
+          "originalUrl": "https://www.tiktok.com/@tjrobertson52/video/7667360650326199565",
+          "base2026Id": "tiktok:tjrobertson52:7667360650326199565",
+          "publishedDate": "2026-07-27",
+          "title": "The creator discusses when SEO may fit a business and frames search and AI visibility around authority, relevant content, and cita"
+        },
+        {
+          "id": "tj-7666514383626980621",
+          "originalUrl": "https://www.tiktok.com/@tjrobertson52/video/7666514383626980621",
+          "base2026Id": "tiktok:tjrobertson52:7666514383626980621",
+          "publishedDate": "2026-07-25",
+          "title": "The creator shares the agency's evolving approach to AI-maintainable websites, client ownership, staging, deterministic checks, an"
+        },
+        {
+          "id": "tj-7665896145075375373",
+          "originalUrl": "https://www.tiktok.com/@tjrobertson52/video/7665896145075375373",
+          "base2026Id": "tiktok:tjrobertson52:7665896145075375373",
+          "publishedDate": "2026-07-24",
+          "title": "The creator explains how to integrate AI into a business through shared context, model skills, and canonical operational knowledge"
+        },
+        {
+          "id": "tj-7665497910938815758",
+          "originalUrl": "https://www.tiktok.com/@tjrobertson52/video/7665497910938815758",
+          "base2026Id": "tiktok:tjrobertson52:7665497910938815758",
+          "publishedDate": "2026-07-22",
+          "title": "Scaled AI-content risk, publishing velocity, and indexed site size"
+        },
+        {
+          "id": "tj-7665088847612595470",
+          "originalUrl": "https://www.tiktok.com/@tjrobertson52/video/7665088847612595470",
+          "base2026Id": "tiktok:tjrobertson52:7665088847612595470",
+          "publishedDate": "2026-07-21",
+          "title": "How cited search results can shape AI descriptions of smaller businesses"
+        }
+      ]
+    },
+    "joshua": {
+      "handle": "joshuamaraney",
+      "liveSourceCount": 271,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "joshua-7674867256186129671",
+          "originalUrl": "https://www.tiktok.com/@joshuamaraney/video/7674867256186129671",
+          "base2026Id": "tiktok:joshuamaraney:7674867256186129671",
+          "publishedDate": "2026-08-17",
+          "title": "The creator asks who is managing a business's Google Ads and argues that inexperienced operation can lead to poor results."
+        },
+        {
+          "id": "joshua-7658287119634402578",
+          "originalUrl": "https://www.tiktok.com/@joshuamaraney/video/7658287119634402578",
+          "base2026Id": "tiktok:joshuamaraney:7658287119634402578",
+          "publishedDate": "2026-07-03",
+          "title": "The Downstream Impact of AI Visibility (Read this report now) New res..."
+        },
+        {
+          "id": "joshua-7654965000531971346",
+          "originalUrl": "https://www.tiktok.com/@joshuamaraney/video/7654965000531971346",
+          "base2026Id": "tiktok:joshuamaraney:7654965000531971346",
+          "publishedDate": "2026-06-24",
+          "title": "How to Connect Google Search Console to Google Analytics and Import S..."
+        },
+        {
+          "id": "joshua-7654095178805824786",
+          "originalUrl": "https://www.tiktok.com/@joshuamaraney/video/7654095178805824786",
+          "base2026Id": "tiktok:joshuamaraney:7654095178805824786",
+          "publishedDate": "2026-06-22",
+          "title": "How to Connect Your Google Business Profile Directly to Google Analyt..."
+        }
+      ]
+    },
+    "kate": {
+      "handle": "webhivedigital",
+      "liveSourceCount": 159,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "kate-7660173788058848534",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7660173788058848534",
+          "base2026Id": "tiktok:webhivedigital:7660173788058848534",
+          "publishedDate": "2026-07-08",
+          "title": "Use these free SEO tools to check your AI search visibility to figure..."
+        },
+        {
+          "id": "kate-7657974363597163798",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7657974363597163798",
+          "base2026Id": "tiktok:webhivedigital:7657974363597163798",
+          "publishedDate": "2026-07-02",
+          "title": "The real difference between traditional SEO vs AI SEO. Because even t..."
+        },
+        {
+          "id": "kate-7655332131513617686",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7655332131513617686",
+          "base2026Id": "tiktok:webhivedigital:7655332131513617686",
+          "publishedDate": "2026-06-25",
+          "title": "Everyone’s obsessing over AI search visibility but does your business..."
+        },
+        {
+          "id": "kate-7655093009544989974",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7655093009544989974",
+          "base2026Id": "tiktok:webhivedigital:7655093009544989974",
+          "publishedDate": "2026-06-24",
+          "title": "If you want to boost your brand’s AI search visibility, you need to b..."
+        },
+        {
+          "id": "kate-7653108189856042262",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7653108189856042262",
+          "base2026Id": "tiktok:webhivedigital:7653108189856042262",
+          "publishedDate": "2026-06-19",
+          "title": "How to tell if you're wasting time or money on SEO. Because website S..."
+        },
+        {
+          "id": "kate-7649379133155282208",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7649379133155282208",
+          "base2026Id": "tiktok:webhivedigital:7649379133155282208",
+          "publishedDate": "2026-06-09",
+          "title": "Your website SEO strategy doesn’t always need more SEO content. Somet..."
+        },
+        {
+          "id": "kate-7646800096583044374",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7646800096583044374",
+          "base2026Id": "tiktok:webhivedigital:7646800096583044374",
+          "publishedDate": "2026-06-02",
+          "title": "Website not on Google? Your technical SEO might be blocking you. Your..."
+        },
+        {
+          "id": "kate-7644200324382625026",
+          "originalUrl": "https://www.tiktok.com/@webhivedigital/video/7644200324382625026",
+          "base2026Id": "tiktok:webhivedigital:7644200324382625026",
+          "publishedDate": "2026-05-26",
+          "title": "Website SEO Keyword Research Tutorial for 2026 If you're working on..."
+        }
+      ]
+    },
+    "dan": {
+      "handle": "iamdandavies",
+      "liveSourceCount": 21,
+      "recordsRetrieved": 20,
+      "sources": [
+        {
+          "id": "dan-7660251226839321878",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7660251226839321878",
+          "base2026Id": "tiktok:iamdandavies:7660251226839321878",
+          "publishedDate": "2026-07-08",
+          "title": "This is the easiest way to make your #wordpress #website lightening f..."
+        },
+        {
+          "id": "dan-7655405261770870038",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7655405261770870038",
+          "base2026Id": "tiktok:iamdandavies:7655405261770870038",
+          "publishedDate": "2026-06-25",
+          "title": "Watch out for those out of date plugins. You want to make sure they a..."
+        },
+        {
+          "id": "dan-7653138444624858390",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7653138444624858390",
+          "base2026Id": "tiktok:iamdandavies:7653138444624858390",
+          "publishedDate": "2026-06-19",
+          "title": "Replying to @Andrew The Liberties These are my go to contact form and..."
+        },
+        {
+          "id": "dan-7652389271193570582",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7652389271193570582",
+          "base2026Id": "tiktok:iamdandavies:7652389271193570582",
+          "publishedDate": "2026-06-17",
+          "title": "This is a simple way to speed up and clean up you Wordpress website a..."
+        },
+        {
+          "id": "dan-7650125230567935254",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7650125230567935254",
+          "base2026Id": "tiktok:iamdandavies:7650125230567935254",
+          "publishedDate": "2026-06-11",
+          "title": "The platform you build on has nothing to do with how professional you..."
+        },
+        {
+          "id": "dan-7649853023690312982",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7649853023690312982",
+          "base2026Id": "tiktok:iamdandavies:7649853023690312982",
+          "publishedDate": "2026-06-10",
+          "title": "Most \"broken\" WordPress sites are one of these five things. The real ..."
+        },
+        {
+          "id": "dan-7649339890156588310",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7649339890156588310",
+          "base2026Id": "tiktok:iamdandavies:7649339890156588310",
+          "publishedDate": "2026-06-09",
+          "title": "Replying to @Host Luma UK in this case I have to disagree with you. T..."
+        },
+        {
+          "id": "dan-7649439207634554134",
+          "originalUrl": "https://www.tiktok.com/@iamdandavies/video/7649439207634554134",
+          "base2026Id": "tiktok:iamdandavies:7649439207634554134",
+          "publishedDate": "2026-06-09",
+          "title": "Be honest, how many of these are you actually doing? Number 5 is wher..."
+        }
+      ]
+    }
+  }
+}

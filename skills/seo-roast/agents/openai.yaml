@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEO Roast Room"
+  short_description: "Eight SEO minds. Evidence, debate, and a testable plan."
+  default_prompt: "Use $seo-roast to challenge my SEO strategy with sourced expert perspectives and a testable action plan."

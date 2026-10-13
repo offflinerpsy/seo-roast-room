@@ -1,0 +1,27 @@
+name: Bug report
+description: A reproducible problem with the skill, room or session protocol
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not attach client exports, credentials or private sessions. Use synthetic examples. Security reports: see SECURITY.md."
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Plugin version/commit, OS, Node version, Codex client and browser
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps, expected behavior and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Error message, synthetic session or screenshot without private information

@@ -1,0 +1,37 @@
+{
+  "name": "seo-roast-room",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "An evidence-first SEO council for Codex",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node skills/seo-roast/scripts/roast.mjs serve",
+    "roast": "node skills/seo-roast/scripts/roast.mjs",
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check-package.mjs",
+    "test:ui": "playwright test",
+    "format": "prettier --write app tests scripts skills/seo-roast/lib skills/seo-roast/scripts *.ts",
+    "format:check": "prettier --check app tests scripts skills/seo-roast/lib skills/seo-roast/scripts *.ts"
+  },
+  "devDependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@playwright/test": "^1.64.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "prettier": "^3.9.10",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}

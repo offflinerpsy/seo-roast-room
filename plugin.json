@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "seo-roast-room",
+  "version": "0.1.0",
+  "description": "Eight source-grounded SEO expert simulations debate your strategy in a live local room, then deliver evidence, dissent, and testable actions. Built for Codex.",
+  "author": { "name": "Alex Yarosh", "url": "https://base2026.dev" },
+  "homepage": "https://github.com/offflinerpsy/seo-roast-room",
+  "repository": "https://github.com/offflinerpsy/seo-roast-room",
+  "license": "MIT",
+  "keywords": ["seo", "codex", "base2026", "ai-search", "research", "council"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "SEO Roast Room",
+        "shortDescription": "Eight SEO minds. Evidence over ego.",
+        "longDescription": "Challenge your SEO strategy with eight independent expert simulations, grounded in attributed public work. Watch the debate, inspect sources, keep the dissent, and leave with a measurable plan. Runs through Codex; the local viewer makes no model calls.",
+        "developerName": "Alex Yarosh / Base2026",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://github.com/offflinerpsy/seo-roast-room",
+        "defaultPrompt": ["Use $seo-roast to challenge my SEO strategy and build a testable plan."],
+        "brandColor": "#D58B65"
+      }
+    }
+  }
+}

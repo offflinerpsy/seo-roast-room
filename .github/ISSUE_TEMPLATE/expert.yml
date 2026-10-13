@@ -1,0 +1,17 @@
+name: Expert or source correction
+description: Correct attribution, identity, outdated advice or an illustrated likeness
+title: "[Source] "
+body:
+  - type: input
+    id: seat
+    attributes:
+      label: Expert or source ID
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Correction and public evidence
+      description: Link the affected passage and a primary source. Removal requests are welcome.
+    validations:
+      required: true

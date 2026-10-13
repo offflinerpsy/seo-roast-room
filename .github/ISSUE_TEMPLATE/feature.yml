@@ -1,0 +1,15 @@
+name: Feature proposal
+description: A concrete improvement to the council or developer experience
+title: "[Feature] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and desired behavior
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: How would we verify this works?

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "base2026-public": {
+      "type": "streamable-http",
+      "url": "https://base2026.dev/api/mcp",
+      "extensions": { "com.openai": { "auth": { "type": "none" } } }
+    }
+  }
+}
